@@ -1,0 +1,7 @@
+flutter_native_splash:
+  #Background color of splash screen
+  color: "#653780"
+  #image which will be shown
+  image: assets/images/logo.png
+
+  web: false
