@@ -21,7 +21,6 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        
         top: false,
         bottom: false,
         left: false,
@@ -34,25 +33,29 @@ class Home extends StatelessWidget {
                 child: Column(
                   children: const [
                     //app bar
-                    HomeAppBar(title: TxtContents.appBarSubtitle,subtitle: TxtContents.appBarTitle,color: Colors.white,),
-      
+                    HomeAppBar(
+                      title: TxtContents.appBarSubtitle,
+                      subtitle: TxtContents.appBarTitle,
+                      color: Colors.white,
+                    ),
+
                     SizedBox(
                       height: Sizes.spaceBetweenSections,
                     ),
-      
+
                     //search bar
                     Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: Sizes.defaultSpace),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: Sizes.defaultSpace),
                         child: SearchBar(
                           title: TxtContents.searchBarTxt,
                           icon: Iconsax.search_normal,
                         )),
-      
+
                     SizedBox(
                       height: Sizes.spaceBetweenSections,
                     ),
-      
+
                     //categories
                     HomeCategories(
                       headingTxt: TxtContents.featuredCategories,
@@ -60,7 +63,7 @@ class Home extends StatelessWidget {
                   ],
                 ),
               ),
-      
+
               //body
               Padding(
                 padding: const EdgeInsets.all(Sizes.defaultSpace),
@@ -72,11 +75,11 @@ class Home extends StatelessWidget {
                       assetImage.carouselImg4,
                       assetImage.carouselImg1
                     ]),
-      
+
                     const SizedBox(
                       height: Sizes.spaceBetweenSections,
                     ),
-      
+
                     //header section
                     HeaderSection(
                       title: TxtContents.featuredProductTxt,
@@ -86,15 +89,15 @@ class Home extends StatelessWidget {
                       btnTxtColor: Colors.black.withOpacity(.5),
                       onPressed: () {},
                     ),
-      
+
                     const SizedBox(
                       height: Sizes.spaceBetween,
                     ),
-      
+
                     //product grid view vertical
                     GridLayout(
                       itemCount: 4,
-                      mainAxisExtent: 263,
+                      mainAxisExtent: 282,
                       itemBuilder: (BuildContext, int) =>
                           const ProductCartVertical(),
                     ),

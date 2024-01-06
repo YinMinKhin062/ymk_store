@@ -90,15 +90,19 @@ class TxtContents {
 
 //home featured products
   static const String featuredProductTxt = "Featured Products";
-  static const String discountPercentTxt = "25%";
+  static const String discountPercentTxt = "-25%";
+  static const String discountOffTxt = " off";
 
 //product name
 // static const String productOvenTxt="60cm Built-in Oven, 66L";
   static const String productOvenTxt =
-      "Built-in Compact Oven with Microwave Combo, 50L";
+      "MW3500K Solo Microwave Oven with Quick Defrost, 23L";
+  static const String productSmartWatchTxt =
+      "Amazfit GTS 3 Smart Watch";
 
 //brand samsung
   static const String brandSamsung = "Samsung";
+  static const String brandRemax = "Remax";
   static const String brandIOS = "Apple";
 
 //store
@@ -155,4 +159,63 @@ class TxtContents {
 
   static const String imgQualityTxt = "HD Image Quaility";
   static const String imgQualitySubtitleTxt = "Set image quality to be seen";
+
+  //profile info
+  static const String personalInfo="Personal Information";
+  static const String profileInfo="Profile Information";
+
+  static const String nameTitle="Name";
+  static const String nameValue="Jennis";
+
+  static const String userIDTitle="UserID";
+  static const String userIDValue="9798798";
+
+  static const String emailTitle="E-mail";
+  static const String emailValue="jennis@email.com";
+
+  static const String phoneNoTitle="Phone Number";
+  static const String phonenoValue="+959-443300123";
+
+  static const String genderTitle="Gender";
+  static const String genderValue="Female";
+
+  static const String doBTitle="Date of Birth";
+  static const String doBValue="10-Oct-1998";
+
+
+  static const String closeAccTxt="Close Account";
+
+  static const String changeProfileImage="Change profile Image";
+
+//product detail
+static const String rateTxt="5.0";
+static const String statusTitle="Status";
+static const String statusValueTxt="In Stock";
+static const String priceTxt="Price";
+
+static const String checkOutTxt="Checkout";
+static const String productDescTitle="Description";
+
+
+
+static const String productDescDetail="Design \n Color - Graphite Black, Ivory White\n Dimensions - 42.4x36x8.8mm ";
+
+//add to cart
+static const String addToCartTxt="Add to Cart";
+
+//reviews & rating
+static const String reviewTitle="Reviews";
+static const String noOfReview=" (199)";
+static const String reviewAppBarTitle="Reviews & Ratings";
+static const String reviewVerifyParam="Reviews and ratings are verified";
+
+
+
+
+
+
+
+
+  
+
 }

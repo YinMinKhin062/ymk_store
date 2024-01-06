@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         automaticallyImplyLeading: false,
         leading: showBackArrow
             ? IconButton(
-              color: Colors.white,
+                color: Colors.black,
                 onPressed: () {
                   Get.back();
                 },

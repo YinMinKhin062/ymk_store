@@ -44,7 +44,7 @@ class TabCategory extends StatelessWidget {
 
                 GridLayout(
                   itemCount: 4,
-                  mainAxisExtent: 263,
+                  mainAxisExtent: 282,
                   itemBuilder: (p0, p1) => const ProductCartVertical(),
                 )
               ],

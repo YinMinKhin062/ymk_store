@@ -18,8 +18,6 @@ class MyApp extends StatelessWidget {
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       home: const NavigationMenu(),
-      // // initialRoute: '/home',
-      // getPages:appRoutes(),
       navigatorKey: Get.key,
     );
   }

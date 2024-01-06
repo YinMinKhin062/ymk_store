@@ -5,6 +5,7 @@ import 'package:ymk_store/utils/theme/custom_themes/elevatedBtnTheme.dart';
 import 'package:ymk_store/utils/theme/custom_themes/textBtnTheme.dart';
 import 'package:ymk_store/utils/theme/custom_themes/txtFormFieldTheme.dart';
 
+import 'custom_themes/chipTheme.dart';
 import 'custom_themes/texttheme.dart';
 import 'outlineBtnTheme.dart';
 
@@ -24,6 +25,7 @@ static  ThemeData lightTheme=ThemeData(
   outlinedButtonTheme: OutlineBtnTheme.outlinebtn,
   textButtonTheme: TextBtnTheme.lightTxtBtn,
   inputDecorationTheme: TxtFormFieldTheme.inputformDecoration,
+  chipTheme: MyChipTheme.lightChipTheme,
 
 );
 static  ThemeData darkTheme=ThemeData(
@@ -37,6 +39,6 @@ static  ThemeData darkTheme=ThemeData(
   bottomSheetTheme: customBottomSheetTheme.darkBottomSheetTheme,
   elevatedButtonTheme: ElevatedBtnTheme.darlEleBtn,
   textButtonTheme: TextBtnTheme.darkTxtBtn,
-
+ 
 );
 }

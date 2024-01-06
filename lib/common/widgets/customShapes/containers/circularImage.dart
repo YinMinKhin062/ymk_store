@@ -29,11 +29,13 @@ class CircularImage extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(100),
       ),
-      child: Image(
-        image: isNetworkImage
-            ? NetworkImage(image)
-            : AssetImage(image) as ImageProvider,
-        fit: fit,
+      child: Center(
+        child: Image(
+          image: isNetworkImage
+              ? NetworkImage(image)
+              : AssetImage(image) as ImageProvider,
+          fit: fit,
+        ),
       ),
     );
   }

@@ -21,11 +21,18 @@ class HorizontalImageText extends StatelessWidget {
         padding: const EdgeInsets.only(right: Sizes.spaceBetweenSections),
         child: Column(
           children: [
-            SizedBox(
-              height: 48,
-              width: 48,
-              child:  CircleAvatar(
-                  backgroundImage: isNetworkImg? NetworkImage(image):AssetImage(image) as ImageProvider),
+            Container(
+              height: 45,
+              width: 45,
+              decoration:const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
+              ),
+              child:  Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                    backgroundImage: isNetworkImg? NetworkImage(image):AssetImage(image) as ImageProvider),
+              ),
             ),
             const SizedBox(
               height: Sizes.spaceBetweenSections / 2,

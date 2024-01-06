@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ymk_store/common/widgets/customShapes/containers/headerContainer.dart';
 import 'package:ymk_store/common/widgets/settings/userProfileTile.dart';
 import 'package:ymk_store/common/widgets/text/headerSection.dart';
+import 'package:ymk_store/features/personalization/screens/address/addressScreen.dart';
+import 'package:ymk_store/features/personalization/screens/profile/profile.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 
 import '../../../../common/widgets/settings/settingMenuTile.dart';
@@ -20,7 +23,7 @@ class Settings extends StatelessWidget {
           //header
           HeaderContainer(
             child: Column(
-              children: const [
+              children: [
                 // CustomAppBar(
 
                 //   title: Text(
@@ -33,12 +36,14 @@ class Settings extends StatelessWidget {
                 // ),
 
                 //profile
-                SizedBox(
+                const SizedBox(
                   height: kToolbarHeight,
                 ),
-                UserProfileTile(),
+                UserProfileTile(
+                  onPressed: () => Get.to(const Profile()),
+                ),
 
-                SizedBox(
+                const SizedBox(
                   height: Sizes.spaceBetweenSections,
                 ),
               ],
@@ -54,11 +59,14 @@ class Settings extends StatelessWidget {
                 const SizedBox(
                   height: Sizes.spaceBetween,
                 ),
+                //address
                 SettingMenuTile(
                   icon: Iconsax.safe_home,
                   menuTitle: TxtContents.addressTxt,
                   menuSubtitle: TxtContents.addressSubtitleTxt,
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(()=>const AddressScreen());
+                  },
                 ),
                 SettingMenuTile(
                   icon: Iconsax.shopping_cart,
@@ -101,7 +109,8 @@ class Settings extends StatelessWidget {
                 const SizedBox(
                   height: Sizes.spaceBetweenSections,
                 ),
-                const HeaderSection(title: TxtContents.appSettingTxt, btnTitle: ""),
+                const HeaderSection(
+                    title: TxtContents.appSettingTxt, btnTitle: ""),
 
                 const SizedBox(
                   height: Sizes.spaceBetween,
@@ -111,10 +120,10 @@ class Settings extends StatelessWidget {
                   icon: Iconsax.location,
                   menuTitle: TxtContents.locationTxt,
                   menuSubtitle: TxtContents.locationSubtitleTxt,
-                  trailing: Transform.scale(
-                   scale: .6,
-                    child: SizedBox(
-                      width: 15,
+                  trailing: SizedBox(
+                    width: 15,
+                    child: Transform.scale(
+                      scale: .63,
                       child: Switch(
                         value: false,
                         onChanged: (value) {},
@@ -130,11 +139,28 @@ class Settings extends StatelessWidget {
                   trailing: SizedBox(
                     width: 15,
                     child: Transform.scale(
-                     scale: .6,
+                      scale: .64,
                       child: Switch(
                         value: false,
                         onChanged: (value) {},
                       ),
+                    ),
+                  ),
+                ),
+
+                //logout btn
+                const SizedBox(
+                  height: Sizes.spaceBetweenSections,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                        padding:const EdgeInsets.symmetric(vertical: 14)),
+                    child: Text(
+                      "Logout",
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
                 ),

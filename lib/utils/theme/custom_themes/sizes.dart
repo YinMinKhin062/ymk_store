@@ -32,6 +32,9 @@ class Sizes{
    //gridview
    static const double gridViewSpace=16;
 
+   //icon
+   static const double iconMd=24;
+
 
 
 }

@@ -5,9 +5,12 @@ class ProductPriceTxt extends StatelessWidget {
       {super.key,
       required this.currency,
       required this.price,
-      this.islineThrough = false});
+      this.isLarge = false,
+      this.islineThrough = false,this.color=Colors.black});
   final bool islineThrough;
   final String currency, price;
+  final bool isLarge;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -15,11 +18,15 @@ class ProductPriceTxt extends StatelessWidget {
       "$currency $price",
       // NumberFormat.currency(decimalDigits: 0).format(price),
       // style: Theme.of(context).textTheme.bodyMedium,
-      style:  Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .apply(decoration: islineThrough ? TextDecoration.lineThrough:null),
-          
+      style: isLarge
+          ? Theme.of(context).textTheme.headlineSmall!.apply(
+              color: color,
+              fontSizeFactor: 1.1,
+              decoration: islineThrough ? TextDecoration.lineThrough : null)
+          : Theme.of(context).textTheme.bodyMedium!.apply(
+              color: color,
+              decoration: islineThrough ? TextDecoration.lineThrough : null),
+
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );

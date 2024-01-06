@@ -19,7 +19,7 @@ class ProductTitleTxt extends StatelessWidget {
       overflow: TextOverflow.ellipsis,
       maxLines: 2,
       style: txtSize == TextSizes.small
-          ? Theme.of(context).textTheme.labelMedium!.apply(color: color)
+          ? Theme.of(context).textTheme.labelMedium!.apply(color: color).copyWith(fontWeight: FontWeight.w600)
           : txtSize == TextSizes.medium
               ? Theme.of(context).textTheme.labelLarge!.apply(color: color)
               : txtSize == TextSizes.large

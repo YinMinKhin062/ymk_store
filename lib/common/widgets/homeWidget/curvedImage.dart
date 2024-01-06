@@ -1,23 +1,31 @@
-
 import 'package:flutter/material.dart';
 
+import '../../../utils/theme/custom_themes/sizes.dart';
 
 class CurvedImage extends StatelessWidget {
   final double imgBorderRadius;
   // final EdgeInsets imgPadding;
   final double? width, height;
   final bool isNetworkImg;
+  final Color? bgColor;
   final String imgPath;
   final VoidCallback? onTap;
+  final BoxFit fit;
+  final BoxBorder? border;
+  final EdgeInsetsGeometry? padding;
 
   const CurvedImage({
     super.key,
-    required this.imgBorderRadius,
+    this.imgBorderRadius = Sizes.md,
     required this.isNetworkImg,
     required this.imgPath,
     this.onTap,
     this.width,
     this.height,
+    this.border,
+    this.padding,
+    this.bgColor,
+    this.fit = BoxFit.cover,
   });
 
   @override
@@ -27,18 +35,20 @@ class CurvedImage extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
+        padding: padding,
         decoration: BoxDecoration(
+          color: bgColor,
           borderRadius: BorderRadius.circular(imgBorderRadius),
-          border: Border.all(color: Colors.grey.withOpacity(.1)),
-         
+          // border: Border.all(color: Colors.grey.withOpacity(.1)),
+          border: border,
         ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(imgBorderRadius),
           child: Image(
-           
             image: isNetworkImg
                 ? NetworkImage(imgPath)
                 : AssetImage(imgPath) as ImageProvider,
+            alignment: Alignment.bottomCenter,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) {
                 return child;
@@ -52,7 +62,7 @@ class CurvedImage extends StatelessWidget {
             },
             errorBuilder: (context, error, stackTrace) =>
                 const Icon(Icons.wifi_off_outlined),
-            fit: BoxFit.cover,
+            fit: fit,
           ),
         ),
       ),

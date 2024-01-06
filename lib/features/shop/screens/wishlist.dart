@@ -29,8 +29,8 @@ class Wishlist extends StatelessWidget {
           child: Column(
             children: [
               GridLayout(
-                itemCount: 6,
-                 mainAxisExtent: 263,
+                itemCount: 2,
+                 mainAxisExtent: 282,
                   itemBuilder: (_, index) =>const ProductCartVertical(),)
             ],
           ),
