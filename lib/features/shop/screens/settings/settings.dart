@@ -10,6 +10,8 @@ import 'package:ymk_store/utils/constants/txtContents.dart';
 
 import '../../../../common/widgets/settings/settingMenuTile.dart';
 import '../../../../utils/theme/custom_themes/sizes.dart';
+import '../../../personalization/screens/cart/cart.dart';
+import '../../../personalization/screens/order/order.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -68,17 +70,23 @@ class Settings extends StatelessWidget {
                     Get.to(()=>const AddressScreen());
                   },
                 ),
+                //cart
                 SettingMenuTile(
                   icon: Iconsax.shopping_cart,
                   menuTitle: TxtContents.cartTxt,
                   menuSubtitle: TxtContents.cartSubtitleTxt,
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(()=>const Cart());
+                  },
                 ),
+                //orders
                 SettingMenuTile(
                   icon: Iconsax.bag_tick,
                   menuTitle: TxtContents.orderTxt,
                   menuSubtitle: TxtContents.orderSubtitleTxt,
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(()=>const Order());
+                  },
                 ),
                 SettingMenuTile(
                   icon: Iconsax.bank,

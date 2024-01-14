@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ymk_store/common/widgets/homeWidget/appbar.dart';
 import 'package:ymk_store/common/widgets/homeWidget/shoppingCartWidget.dart';
@@ -6,6 +7,8 @@ import 'package:ymk_store/common/widgets/searchBar/searchBar.dart';
 import 'package:ymk_store/common/widgets/storeWidget/brandCard.dart';
 import 'package:ymk_store/common/widgets/storeWidget/tabCategory.dart';
 import 'package:ymk_store/common/widgets/text/headerSection.dart';
+import 'package:ymk_store/features/personalization/screens/cart/cart.dart';
+import 'package:ymk_store/features/shop/screens/allBrands/allBrands.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 
 import '../../../common/widgets/layout/gridLayout.dart';
@@ -30,7 +33,9 @@ class Store extends StatelessWidget {
           actions: [
             ShoppingCartWidget(
               iconColor: Colors.black,
-              onPressed: () {},
+              onPressed: () {
+                Get.to(()=>const Cart());
+              },
             )
           ],
         ),
@@ -63,10 +68,12 @@ class Store extends StatelessWidget {
                   
                           //Featured brands
                           HeaderSection(
-                            title: "Featured Brands",
+                            title: TxtContents.featuredBrandTxt,
                             showActionBtn: true,
                             btnTitle: TxtContents.viewAllBtnTxt,
-                            onPressed: () {},
+                            onPressed: () {
+                                Get.to(()=>const AllBrands());
+                            },
                             btnTxtColor: Colors.black.withOpacity(.3),
                           ),
                   
@@ -76,7 +83,7 @@ class Store extends StatelessWidget {
                   
                           GridLayout(
                             itemCount: 4,
-                            mainAxisExtent: 60,
+                            mainAxisExtent: 60,//60
                             itemBuilder: (_, int) {
                               return const BrandCard();
                             },

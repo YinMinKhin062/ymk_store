@@ -9,6 +9,7 @@ import '../../../../utils/theme/custom_themes/sizes.dart';
 import 'productWidgets/bottomAddToCart.dart';
 import 'productWidgets/productAttribute.dart';
 import 'productWidgets/productMetadata.dart';
+import 'productWidgets/quantityWithAddtoCart.dart';
 
 class ProductDetail extends StatelessWidget {
   const ProductDetail({super.key});
@@ -16,7 +17,7 @@ class ProductDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const BottomAddToCart(),
+      bottomNavigationBar:const  BottomAddToCart(child: QuantityWithAddtoCart(),),
       // backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
         child: Column(
@@ -28,7 +29,7 @@ class ProductDetail extends StatelessWidget {
             const SizedBox(height: Sizes.spaceBetween,),
             CircularContainer(
               height: 280,
-              width: MediaQuery.of(context).size.width*.9,
+              width: MediaQuery.of(context).size.width*.85,
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(.3),
@@ -46,7 +47,7 @@ class ProductDetail extends StatelessWidget {
               showBorder: true,
               radius: Sizes.cardRadiusMd,
               child: Padding(
-                padding: const EdgeInsets.all(Sizes.defaultSpace + 1),
+                padding: const EdgeInsets.all(Sizes.defaultSpace ),
                 child: Column(
                   children: [
                     const RateAndShare(),

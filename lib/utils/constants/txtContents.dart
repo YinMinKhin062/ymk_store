@@ -90,6 +90,7 @@ class TxtContents {
 
 //home featured products
   static const String featuredProductTxt = "Featured Products";
+  static const String productsTxt = "Products";
   static const String discountPercentTxt = "-25%";
   static const String discountOffTxt = " off";
 
@@ -99,11 +100,19 @@ class TxtContents {
       "MW3500K Solo Microwave Oven with Quick Defrost, 23L";
   static const String productSmartWatchTxt =
       "Amazfit GTS 3 Smart Watch";
+  static const String productMiTxt =
+      "Xiaomi 12 Lite";
+
 
 //brand samsung
+
+  static const String featuredBrandTxt= "Featured Brands";
+  static const String brandsTxt= "Brands";
+  static const String brandTxt= "Brand";
   static const String brandSamsung = "Samsung";
   static const String brandRemax = "Remax";
   static const String brandIOS = "Apple";
+  static const String brandMi = "Mi";
 
 //store
   static const String storeAppBarTitle = "Store";
@@ -126,7 +135,7 @@ class TxtContents {
 
   static const String appSettingTxt = "App Settings";
 
-  static const String accountName = "Jennis";
+  static const String accountName = "Jennis Olivia";
   static const String accountEmail = "jennis98@gmail.com";
 
 //setting menu titles
@@ -165,7 +174,7 @@ class TxtContents {
   static const String profileInfo="Profile Information";
 
   static const String nameTitle="Name";
-  static const String nameValue="Jennis";
+  static const String nameValue="Jennis Olivia";
 
   static const String userIDTitle="UserID";
   static const String userIDValue="9798798";
@@ -195,6 +204,9 @@ static const String priceTxt="Price";
 
 static const String checkOutTxt="Checkout";
 static const String productDescTitle="Description";
+static const String colorsTxt="Colors";
+static const String colorTxt="Color";
+
 
 
 
@@ -208,6 +220,37 @@ static const String reviewTitle="Reviews";
 static const String noOfReview=" (199)";
 static const String reviewAppBarTitle="Reviews & Ratings";
 static const String reviewVerifyParam="Reviews and ratings are verified";
+
+//address
+
+static const String addressAppBarTitle="Addresses";
+static const String addAddressAppBarTitle="Add new address";
+static const String saveBtn="Save";
+static const String addressDetails="Dagon Center, Bargaryar Road, Myaynigone Township, Yangon District";
+static const String housenoTxt="House no, floors ,..";
+
+//coupon
+static const String haveCouponTxt="Have a Coupon Code ?";
+static const String couponTxt="Coupon";
+static const String subtotalTxt="Subtotal";
+static const String shppingFeeTxt="Shipping fees";
+static const String TaxFeeTxt="Tax fees";
+static const String orderTotalTxt="Order Total";
+
+//payment section
+static const String paymentMethodTxt="Payment Method";
+static const String changeTxt="Change";
+
+//Shipping Address
+static const String shippingAddressTxt="Shipping Address";
+
+//palce order
+static const String placeOrderTxt="Place Order";
+
+static const String myOrderAppBar= "My Orders";
+
+//product filter array
+static const List <String> productFilterArray=['Name','Higher Price','Lower Price','Sale','Newest','Popularity'];
 
 
 

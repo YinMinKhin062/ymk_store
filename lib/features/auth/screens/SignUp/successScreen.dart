@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:ymk_store/common/styles/spacingStyles.dart';
 import 'package:ymk_store/utils/theme/custom_themes/sizes.dart';
-import 'package:ymk_store/utils/constants/assetImage.dart';
 
 
 import '../../../../utils/constants/txtContents.dart';
 
 class SuccesScreen extends StatelessWidget {
-  const SuccesScreen({super.key});
+  const SuccesScreen({super.key,required this.title,required this.subtitle,required this.image});
+
+  final String title,subtitle,image;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class SuccesScreen extends StatelessWidget {
           children: [
             //image
             Image(
-              image: const AssetImage(assetImage.successfullyCreateAcc),
+              image:  AssetImage(image),
               width: MediaQuery.of(context).size.width * .9,
             ),
             // const SizedBox(
@@ -27,7 +28,7 @@ class SuccesScreen extends StatelessWidget {
             // ),
             //Verify Text
             Text(
-              TxtContents.successTxt,
+              title,
               style: Theme.of(context).textTheme.headlineMedium,
               textAlign: TextAlign.center,
             ),
@@ -43,7 +44,7 @@ class SuccesScreen extends StatelessWidget {
               height: Sizes.spaceBetween,
             ),
             Text(
-              TxtContents.successSubttile,
+              subtitle,
               style: Theme.of(context).textTheme.labelMedium,
               textAlign: TextAlign.center,
             ),

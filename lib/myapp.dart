@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:ymk_store/navigationMenu.dart';
+import 'package:ymk_store/features/auth/screens/onboarding.dart';
 import 'package:ymk_store/utils/constants/assetImage.dart';
 import 'package:ymk_store/utils/theme/theme.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      home: const NavigationMenu(),
+      home: const OnBoardingScreen(),
       navigatorKey: Get.key,
     );
   }

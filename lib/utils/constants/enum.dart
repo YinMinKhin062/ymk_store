@@ -1,5 +1,23 @@
-enum TextSizes{small,medium,large}
+enum TextSizes { small, medium, large }
 
-enum OrderStatus{processing,shipped,delivered}
+enum OrderStatus { processing, shipped, delivered }
 
-enum PaymentMethods{paypal,mastercard,visa,master}
+enum PaymentMethods { paypal, mastercard, visa, master }
+
+enum ShippingTownships {
+  yangon,
+  mandalay,
+  naypyitaw,
+  mon,
+  sagaing,
+  bago,
+  ayeyarwaddy,
+  kayin,
+  magway,
+  shan,
+  tanintharyi,
+  rakhine,
+  kachin,
+  chin,
+  busstation
+}

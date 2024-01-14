@@ -25,6 +25,7 @@ class ProductPriceTxt extends StatelessWidget {
               decoration: islineThrough ? TextDecoration.lineThrough : null)
           : Theme.of(context).textTheme.bodyMedium!.apply(
               color: color,
+              fontWeightDelta: 2,
               decoration: islineThrough ? TextDecoration.lineThrough : null),
 
       maxLines: 1,

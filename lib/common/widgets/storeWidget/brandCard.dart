@@ -10,13 +10,14 @@ import '../products/brandNameWithVerify.dart';
 
 class BrandCard extends StatelessWidget {
 final bool showBorder;
+final void Function()? onTap;
 
-  const BrandCard({super.key,this.showBorder=true});
+  const BrandCard({super.key,this.showBorder=true,this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: CircularContainer(
         
         padding: const EdgeInsets.all(Sizes.sm),
@@ -49,10 +50,12 @@ final bool showBorder;
                   brandName: TxtContents.brandIOS,
                   txtSizes: TextSizes.large,
                 ),
+                const SizedBox(height: Sizes.sm/2,),
                 Text(
                   TxtContents.IOSProductCounts,
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.labelMedium,
+                  
                 ),
               ],
             ),

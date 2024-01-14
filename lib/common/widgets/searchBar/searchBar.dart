@@ -12,7 +12,7 @@ class SearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.all(Sizes.sm + 5),
+      padding: const EdgeInsets.all(Sizes.sm/2 ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(Sizes.cardRadiusLg),
@@ -20,20 +20,35 @@ class SearchBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(
-            Iconsax.search_normal,
-            color: Colors.grey,
-          ),
-          const SizedBox(
-            width: Sizes.inputFieldSpaces/2,
-          ),
-          Text(
-            title,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .apply(color: Colors.grey),
+          Flexible(
+            child: TextFormField(
+              decoration: InputDecoration(
+                hintText: "Search in store",
+                hintStyle: Theme.of(context).textTheme.titleSmall!.copyWith(
+                  color: Colors.grey
+                ),
+                prefixIcon: const Icon(Iconsax.search_normal),
+                enabledBorder: InputBorder.none,
+                disabledBorder: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                errorBorder: InputBorder.none,
+              ),
+            ),
           )
+          // const Icon(
+          //   Iconsax.search_normal,
+          //   color: Colors.grey,
+          // ),
+          // const SizedBox(
+          //   width: Sizes.inputFieldSpaces/2,
+          // ),
+          // Text(
+          //   title,
+          //   style: Theme.of(context)
+          //       .textTheme
+          //       .bodySmall!
+          //       .apply(color: Colors.grey),
+          // )
         ],
       ),
     );

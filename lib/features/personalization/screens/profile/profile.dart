@@ -16,8 +16,8 @@ class Profile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: Text("Profile"),
+      appBar:  CustomAppBar(
+        title: Text("Profile",style:Theme.of(context).textTheme.headlineSmall),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
@@ -32,7 +32,9 @@ class Profile extends StatelessWidget {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                     
+                    },
                     child: Stack(
                       clipBehavior: Clip.none,
                       children: const [

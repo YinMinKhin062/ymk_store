@@ -65,7 +65,7 @@ class VeriyEmailScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: () {
-                        Get.to(const SuccesScreen());
+                        Get.to(const SuccesScreen(image: assetImage.successfullyCreateAcc, subtitle: TxtContents.successSubttile, title: TxtContents.successTxt,));
                       },
                       child: const Text(TxtContents.continueTxt))),
               const SizedBox(

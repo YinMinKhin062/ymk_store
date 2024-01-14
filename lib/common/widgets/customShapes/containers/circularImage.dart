@@ -27,6 +27,7 @@ class CircularImage extends StatelessWidget {
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: Colors.white,
+        // color: Colors.red,
         borderRadius: BorderRadius.circular(100),
       ),
       child: Center(

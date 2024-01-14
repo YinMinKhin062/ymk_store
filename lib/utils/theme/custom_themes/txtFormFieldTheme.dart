@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
 
+import 'sizes.dart';
+
 class TxtFormFieldTheme {
   TxtFormFieldTheme._();
-  static const inputformDecoration = InputDecorationTheme(
-   contentPadding: EdgeInsets.all(12),
-   isDense: true,
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(12)),
+  static InputDecorationTheme inputformDecoration = InputDecorationTheme(
+    contentPadding: const EdgeInsets.all(12),
+    isDense: true,
+    errorMaxLines: 3,
+    
+    prefixIconColor: Colors.grey,
+    suffixIconColor: Colors.grey,
+    labelStyle:const TextStyle().copyWith(color: Colors.black,),
+    hintStyle:const TextStyle().copyWith(color: Colors.black),
+    errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
+    alignLabelWithHint: true,
+
+    // floatingLabelAlignment: FloatingLabelAlignment.start,
+    border: const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(Sizes.inputFieldRadius)),
     ),
-    errorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(12)),
+    errorBorder:const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(Sizes.inputFieldRadius)),
     ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(12)),
+    focusedBorder:const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(Sizes.inputFieldRadius)),
     ),
-    focusedErrorBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(12)),
+    focusedErrorBorder: const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(Sizes.inputFieldRadius)),
     ),
-    disabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(12)),
+    disabledBorder:const OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(Sizes.inputFieldRadius)),
     ),
   );
 }

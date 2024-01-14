@@ -8,12 +8,13 @@ class CircularContainer extends StatelessWidget {
   final Color bgColor;
   final Widget? child;
   final bool showBorder;
+  final Color borderColor;
   final List<BoxShadow>? boxShadow;
   final AlignmentGeometry? alignment;
   const CircularContainer(
       {super.key,
-      this.width = 400,
-      this.height = 400,
+      this.width,
+      this.height,
       this.alignment,
       this.showBorder=false,
       this.padding ,
@@ -21,6 +22,7 @@ class CircularContainer extends StatelessWidget {
       this.radius = 400,
       this.bgColor=Colors.transparent,
       this.boxShadow,
+      this.borderColor=Colors.grey,
       this.child});
 
   @override
@@ -33,7 +35,7 @@ class CircularContainer extends StatelessWidget {
       alignment: alignment,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        border:showBorder? Border.all(color: Colors.black.withOpacity(.4),width: .2):null,
+        border:showBorder? Border.all(color:borderColor,width: .2):null,
         color: bgColor,
         boxShadow: boxShadow,
       ),

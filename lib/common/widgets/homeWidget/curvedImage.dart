@@ -13,6 +13,7 @@ class CurvedImage extends StatelessWidget {
   final BoxFit fit;
   final BoxBorder? border;
   final EdgeInsetsGeometry? padding;
+  // final bool showBorder;
 
   const CurvedImage({
     super.key,
@@ -25,6 +26,7 @@ class CurvedImage extends StatelessWidget {
     this.border,
     this.padding,
     this.bgColor,
+    // this.showBorder=false,
     this.fit = BoxFit.cover,
   });
 
@@ -39,7 +41,7 @@ class CurvedImage extends StatelessWidget {
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(imgBorderRadius),
-          // border: Border.all(color: Colors.grey.withOpacity(.1)),
+          // border: showBorder? Border.all(color: Colors.grey.withOpacity(.1)):null,
           border: border,
         ),
         child: ClipRRect(

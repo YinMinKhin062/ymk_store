@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ymk_store/features/shop/screens/subcategories/subcategories.dart';
 
 import '../../../utils/constants/txtContents.dart';
 import '../../../utils/constants/assetImage.dart';
@@ -43,7 +45,9 @@ class HomeCategories extends StatelessWidget {
                   image: assetImage.category1,
                   imgCategoryTxt: TxtContents.categoryName,
                   categoryTxtColor: Colors.white,
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(()=>const SubCategories());
+                  },
                 );
               },
             ),

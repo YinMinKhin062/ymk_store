@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:iconsax/iconsax.dart';
 
 import 'package:ymk_store/common/widgets/homeWidget/homeCategories.dart';
 import 'package:ymk_store/common/widgets/customShapes/containers/headerContainer.dart';
 import 'package:ymk_store/common/widgets/text/headerSection.dart';
+import 'package:ymk_store/features/shop/screens/allProducts/allProducts.dart';
 import 'package:ymk_store/utils/constants/assetImage.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 import '../../../common/widgets/homeWidget/homeAppBar.dart';
@@ -87,7 +89,7 @@ class Home extends StatelessWidget {
                       showActionBtn: true,
                       txtColor: Colors.black,
                       btnTxtColor: Colors.black.withOpacity(.5),
-                      onPressed: () {},
+                      onPressed: () {Get.to(()=>const AllProducts());},
                     ),
 
                     const SizedBox(

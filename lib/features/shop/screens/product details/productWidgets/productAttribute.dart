@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ymk_store/utils/constants/txtContents.dart';
 
 import '../../../../../common/widgets/text/headerSection.dart';
 import '../../../../../utils/theme/custom_themes/sizes.dart';
@@ -104,7 +105,7 @@ class ProductAttribute extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const HeaderSection(title: "Colors", btnTitle: ""),
+            const HeaderSection(title: TxtContents.colorsTxt, btnTitle: ""),
             const SizedBox(
               height: Sizes.spaceBetween / 2,
             ),
