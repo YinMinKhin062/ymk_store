@@ -13,7 +13,7 @@ class TxtFormFieldTheme {
     suffixIconColor: Colors.grey,
     labelStyle:const TextStyle().copyWith(color: Colors.black,),
     hintStyle:const TextStyle().copyWith(color: Colors.black),
-    errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal),
+    errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal,fontSize: 10),
     alignLabelWithHint: true,
 
     // floatingLabelAlignment: FloatingLabelAlignment.start,

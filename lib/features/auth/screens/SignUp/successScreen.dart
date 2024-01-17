@@ -6,9 +6,10 @@ import 'package:ymk_store/utils/theme/custom_themes/sizes.dart';
 import '../../../../utils/constants/txtContents.dart';
 
 class SuccesScreen extends StatelessWidget {
-  const SuccesScreen({super.key,required this.title,required this.subtitle,required this.image});
+  const SuccesScreen({super.key,required this.title,required this.subtitle,required this.image,this.onPressed});
 
   final String title,subtitle,image;
+  final VoidCallback ? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class SuccesScreen extends StatelessWidget {
             SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed:onPressed,
                     child: const Text(TxtContents.continueTxt))),
           ],
         ),

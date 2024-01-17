@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:ymk_store/common/widgets/homeWidget/appbar.dart';
 import 'package:ymk_store/common/widgets/homeWidget/curvedImage.dart';
 import 'package:ymk_store/common/widgets/text/headerSection.dart';
@@ -57,7 +59,7 @@ class SubCategories extends StatelessWidget {
                     ),
                   )
 
-                  // const ProductCardHorizontal(),
+               
                 ],
               )
             ],

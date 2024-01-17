@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:ymk_store/data/repositories/authentication/authentication_Repository.dart';
+import 'package:ymk_store/features/auth/controllers/signup/verifyEmailController.dart';
 import 'package:ymk_store/features/auth/screens/SignUp/successScreen.dart';
 import 'package:ymk_store/features/auth/screens/loginScreen.dart';
 
@@ -10,16 +12,20 @@ import 'package:ymk_store/utils/constants/txtContents.dart';
 import '../../../../utils/theme/custom_themes/sizes.dart';
 
 class VeriyEmailScreen extends StatelessWidget {
-  const VeriyEmailScreen({super.key});
+  const VeriyEmailScreen({super.key, this.email});
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(VerifyEmailController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
               onPressed: () {
+                // AuthenticationRepository.instance.logOut();
+                // AuthenticationRepository.instance.screenRedirect();
                 Get.offAll(const Login());
               },
               icon: const Icon(CupertinoIcons.clear))
@@ -46,7 +52,7 @@ class VeriyEmailScreen extends StatelessWidget {
                 height: Sizes.spaceBetween,
               ),
               Text(
-                "yinminkhin98@gmail.com",
+                email ?? ' ',
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -65,7 +71,7 @@ class VeriyEmailScreen extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: () {
-                        Get.to(const SuccesScreen(image: assetImage.successfullyCreateAcc, subtitle: TxtContents.successSubttile, title: TxtContents.successTxt,));
+                        controller.checkEmailVerificationStatus();
                       },
                       child: const Text(TxtContents.continueTxt))),
               const SizedBox(
@@ -79,7 +85,9 @@ class VeriyEmailScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12)),
                         padding: const EdgeInsets.symmetric(vertical: 15),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.sendEmailVerification();
+                      },
                       child: const Text(TxtContents.resendEmailTxt))),
             ],
           ),

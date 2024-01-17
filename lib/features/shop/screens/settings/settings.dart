@@ -4,12 +4,14 @@ import 'package:iconsax/iconsax.dart';
 import 'package:ymk_store/common/widgets/customShapes/containers/headerContainer.dart';
 import 'package:ymk_store/common/widgets/settings/userProfileTile.dart';
 import 'package:ymk_store/common/widgets/text/headerSection.dart';
+import 'package:ymk_store/data/repositories/authentication/authentication_Repository.dart';
 import 'package:ymk_store/features/personalization/screens/address/addressScreen.dart';
 import 'package:ymk_store/features/personalization/screens/profile/profile.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 
 import '../../../../common/widgets/settings/settingMenuTile.dart';
 import '../../../../utils/theme/custom_themes/sizes.dart';
+import '../../../auth/screens/loginScreen.dart';
 import '../../../personalization/screens/cart/cart.dart';
 import '../../../personalization/screens/order/order.dart';
 
@@ -163,7 +165,11 @@ class Settings extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                        AuthenticationRepository.instance.logOut();
+                        // AuthenticationRepository.instance.screenRedirect();
+                        Get.offAll(const Login());
+                    },
                     style: OutlinedButton.styleFrom(
                         padding:const EdgeInsets.symmetric(vertical: 14)),
                     child: Text(
