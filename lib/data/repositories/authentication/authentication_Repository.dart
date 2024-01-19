@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ymk_store/features/auth/controllers/signup/verifyEmailController.dart';
 import 'package:ymk_store/features/auth/screens/SignUp/verifyEmail.dart';
 import 'package:ymk_store/features/auth/screens/loginScreen.dart';
@@ -64,6 +65,8 @@ class AuthenticationRepository extends GetxController {
       throw e.code;
     } on FirebaseException catch (e) {
       throw e.code;
+    } on FormatException catch (e) {
+      throw e.toString();
     } catch (e) {
       throw 'Something went wrong. Please try again.';
     }
@@ -80,8 +83,8 @@ class AuthenticationRepository extends GetxController {
       throw e.code;
     } on FirebaseException catch (e) {
       throw e.code;
-    } on PlatformException catch (e) {
-      throw e.code;
+    } on FormatException catch (e) {
+      throw e.toString();
     } catch (e) {
       throw 'Something went wrong. Please try again';
     }
@@ -95,21 +98,64 @@ class AuthenticationRepository extends GetxController {
       throw MyFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw e.code;
-    } on PlatformException catch (e) {
-      throw e.code;
+    } on FormatException catch (e) {
+      throw e.toString();
     } catch (e) {
       throw 'Something went wrong.Pleae try again';
+    }
+  }
+
+  //password reset
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    }  on FirebaseAuthException catch (e) {
+      throw e.code;
+    } on FirebaseException catch (e) {
+      throw e.code;
+    } on FormatException catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  //google authentication
+  Future<UserCredential> logInWithGoogle() async {
+    try {
+      //trigger auth flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      //obtain auth details from request
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+      //create new credential
+      final credentail = GoogleAuthProvider.credential(
+          accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+      // return user credential
+      return await _auth.signInWithCredential(credentail);
+    } on FirebaseAuthException catch (e) {
+      throw e.code;
+    } on FirebaseException catch (e) {
+      throw e.code;
+    } on FormatException catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
     }
   }
 
   //signout
   Future<void> logOut() async {
     try {
+      // await GoogleSignIn().signOut();
       await _auth.signOut();
+      Get.offAll(() => const Login());
     } on FirebaseAuthException catch (e) {
       throw MyFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
       throw e.code;
+    } on FormatException catch (e) {
+      throw e.toString();
     } catch (e) {
       throw 'Something went wrong.Pleae try again';
     }

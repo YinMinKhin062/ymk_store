@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:ymk_store/common/widgets/homeWidget/appbar.dart';
 import 'package:ymk_store/features/auth/screens/fogotPasscode/resetPassword.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
+import 'package:ymk_store/utils/validators/validation.dart';
 
 import '../../../../utils/theme/custom_themes/sizes.dart';
+import '../../controllers/signin/forgotPwdController.dart';
 
 class ForgotPasscode extends StatefulWidget {
   const ForgotPasscode({super.key});
@@ -16,12 +19,17 @@ class ForgotPasscode extends StatefulWidget {
 class _ForgotPasscodeState extends State<ForgotPasscode> {
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(forgotPwdController());
     return GestureDetector(
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
-        appBar: AppBar(),
+        appBar:const  CustomAppBar(
+          title:Text(""),
+          showBackArrow: true,
+          
+        ),
         body: Padding(
           padding: const EdgeInsets.all(Sizes.defaultSpace),
           child: Column(
@@ -43,27 +51,31 @@ class _ForgotPasscodeState extends State<ForgotPasscode> {
                 height: Sizes.spaceBetweenSections,
               ),
               Form(
+                  key: controller.forgotPwdformKey,
                   child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        labelText: TxtContents.email,
-                        prefixIcon: Icon(Iconsax.direct_right)),
-                  ),
-                  const SizedBox(
-                    height: Sizes.inputFieldSpaces,
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Get.to(const ResetPassword());
-                        },
-                        child: const Text(TxtContents.submitBtnTxt)),
-                  ),
-                ],
-              ))
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextFormField(
+                        controller: controller.email,
+                        validator: (value) => MyValidator.validateEmail(value),
+                        decoration: const InputDecoration(
+                            labelText: TxtContents.email,
+                            prefixIcon: Icon(Iconsax.direct_right)),
+                      ),
+                      const SizedBox(
+                        height: Sizes.inputFieldSpaces,
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              controller.sendPwdResetEmail();
+                              // Get.to( ResetPassword(email: controller.email.text,));
+                            },
+                            child: const Text(TxtContents.submitBtnTxt)),
+                      ),
+                    ],
+                  ))
             ],
           ),
         ),

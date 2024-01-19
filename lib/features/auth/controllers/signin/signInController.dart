@@ -6,6 +6,7 @@ import 'package:ymk_store/data/repositories/authentication/authentication_Reposi
 import 'package:ymk_store/utils/networkConnection/networkManager.dart';
 
 import '../../../../utils/networkConnection/loaders.dart';
+import '../../../personalization/controllers/userController.dart';
 
 class SignInController extends GetxController {
   static SignInController get instance => Get.find();
@@ -14,20 +15,24 @@ class SignInController extends GetxController {
   final password = TextEditingController();
   final isHidePassword = true.obs;
   final isCheckedRememberme = false.obs;
-  final localStorage=GetStorage();
+  final localStorage = GetStorage();
+
+  final userController = Get.put(UserController());
 
   GlobalKey<FormState> SignInFormKey = GlobalKey<FormState>();
 
-  void onInit(){
+  @override
+  void onInit() {
     super.onInit();
-    email.text=localStorage.read('Remember_me_email')?? '';
-    password.text=localStorage.read('Remember_me_password')?? '';
+    email.text = localStorage.read('Remember_me_email') ?? '';
+    password.text = localStorage.read('Remember_me_password') ?? '';
   }
 
-  void SignIn() async {
+  //signin with email & pwd
+  void signIn() async {
     //internet connection check
     try {
-      final isConnected = await NetworkManager.instance.isConntected();
+      final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         return;
       }
@@ -37,16 +42,44 @@ class SignInController extends GetxController {
         return;
       }
 
-      if(isCheckedRememberme.value){
+      if (isCheckedRememberme.value) {
         localStorage.write('Remember_me_email', email.text.trim());
         localStorage.write('Remember_me_password', password.text.trim());
       }
+      // else{
+      //   localStorage.write('Remember_me_email', '');
+      //   localStorage.write('Remember_me_password', '');
+      // }
 
-   final userCredential  = await AuthenticationRepository.instance.logInWithEmailAndPassword(
-          email: email.text.trim(), password: password.text.trim());
+      //signin with email & pwd
+      final userCredential = await AuthenticationRepository.instance
+          .logInWithEmailAndPassword(
+              email: email.text.trim(), password: password.text.trim());
+
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
-      Loaders.errorSnackBar(title: "Oh Snap!",message: e.toString());
+      Loaders.errorSnackBar(title: "Oh snap!", message: e.toString());
+    }
+  }
+
+  Future<void> googleSignIn() async {
+    try {
+      final isConnected = await NetworkManager.instance.isConnected();
+      if (!isConnected) {
+        return;
+      }
+
+      final userCredential =
+          await AuthenticationRepository.instance.logInWithGoogle();
+
+      userController.addUserRecord(userCredential);
+      AuthenticationRepository.instance.screenRedirect();
+
+      localStorage.write('Remember_me_email', ' ');
+      localStorage.write('Remember_me_password', ' ');
+
+    } catch (e) {
+      Loaders.errorSnackBar(title: "Oh snap!", message: e.toString());
     }
   }
 }

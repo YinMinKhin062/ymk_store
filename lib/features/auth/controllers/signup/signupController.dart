@@ -28,7 +28,7 @@ class SignUpController extends GetxController {
       // FullScreenLoader.openLoadingDialog("Processing your info",assetImage.brandIOS);
 
       //check internet connectivity
-      final isConntected = await NetworkManager.instance.isConntected();
+      final isConntected = await NetworkManager.instance.isConnected();
       if (!isConntected) {
         // FullScreenLoader.stopLoading();
         return;
@@ -60,6 +60,7 @@ class SignUpController extends GetxController {
           phoneno: phoneno.text.trim(),
           profilepic: '');
 
+      //add user data to firebase
       final userRepositories = Get.put(UserRepositories());
       await userRepositories.addUser(newUser);
 

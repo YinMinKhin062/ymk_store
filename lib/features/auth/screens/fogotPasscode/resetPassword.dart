@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ymk_store/common/styles/spacingStyles.dart';
+import 'package:ymk_store/features/auth/screens/loginScreen.dart';
 import 'package:ymk_store/utils/constants/assetImage.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 
 import '../../../../utils/theme/custom_themes/sizes.dart';
+import '../../controllers/signin/forgotPwdController.dart';
 
 class ResetPassword extends StatelessWidget {
-  const ResetPassword({super.key});
-
+  const ResetPassword({super.key, required this.email});
+  final String email;
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(forgotPwdController());
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -45,7 +48,7 @@ class ResetPassword extends StatelessWidget {
 
               //mail address
               Text(
-                "yinminkhin98@gmail.com",
+                email,
                 style: Theme.of(context).textTheme.labelLarge,
                 textAlign: TextAlign.center,
               ),
@@ -67,7 +70,9 @@ class ResetPassword extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.offAll(() => const Login());
+                    },
                     child: const Text(TxtContents.btnDoneTxt)),
               ),
               const SizedBox(
@@ -81,7 +86,9 @@ class ResetPassword extends StatelessWidget {
                           borderRadius: BorderRadius.circular(12)),
                       padding: const EdgeInsets.symmetric(vertical: 15),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      forgotPwdController.instance.resendResetPwdEmail(email);
+                    },
                     child: const Text(TxtContents.btnResendMailTxt)),
               ),
             ],

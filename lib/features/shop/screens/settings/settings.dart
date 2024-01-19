@@ -168,7 +168,7 @@ class Settings extends StatelessWidget {
                     onPressed: () {
                         AuthenticationRepository.instance.logOut();
                         // AuthenticationRepository.instance.screenRedirect();
-                        Get.offAll(const Login());
+                        // Get.offAll(const Login());
                     },
                     style: OutlinedButton.styleFrom(
                         padding:const EdgeInsets.symmetric(vertical: 14)),

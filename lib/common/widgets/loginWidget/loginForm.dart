@@ -12,16 +12,10 @@ import '../../../features/auth/screens/SignUp/signupScreen.dart';
 import '../../../utils/constants/txtContents.dart';
 import '../../../utils/theme/custom_themes/sizes.dart';
 
-class LoginForm extends StatefulWidget {
+class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
 
-  @override
-  State<LoginForm> createState() => _LoginFormState();
-}
-
-class _LoginFormState extends State<LoginForm> {
   // bool isHidePassword = true;
-  // bool isChecked = true;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(SignInController());
@@ -48,7 +42,8 @@ class _LoginFormState extends State<LoginForm> {
             () => TextFormField(
               obscureText: controller.isHidePassword.value,
               controller: controller.password,
-              validator: (pwdValue) => MyValidator.validationEmptyText('Password',pwdValue),
+              validator: (pwdValue) =>
+                  MyValidator.validationEmptyText('Password', pwdValue),
               decoration: InputDecoration(
                 prefixIcon: const Icon(Iconsax.password_check),
                 labelText: TxtContents.lbPwdTxt,
@@ -114,7 +109,7 @@ class _LoginFormState extends State<LoginForm> {
                 child: CupertinoButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
-                    Get.to(const ForgotPasscode());
+                    Get.to(() => const ForgotPasscode());
                   },
                   child: Text(
                     TxtContents.forgotPwd,
@@ -136,7 +131,7 @@ class _LoginFormState extends State<LoginForm> {
               width: double.infinity,
               child: ElevatedButton(
                   onPressed: () {
-                    controller.SignIn();
+                    controller.signIn();
                     // Get.to(const NavigationMenu());
                   },
                   child: const Text(
