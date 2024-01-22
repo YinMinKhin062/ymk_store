@@ -252,9 +252,16 @@ static const String myOrderAppBar= "My Orders";
 //product filter array
 static const List <String> productFilterArray=['Name','Higher Price','Lower Price','Sale','Newest','Popularity'];
 
+//change name in profile
+static const String changeNameAppBarTitle="Change Name";
 
-
-
+//reauth
+static const String reAuthAppBarTitle="Re-Authenticate User";
+static const String deleteTxt="Delete";
+static const String verifyTxt="Verify";
+static const String cancelTxt="Cancel";
+static const String deleteAlertBody="Are you sure you want to delete your account permanently?";
+static const String deleteAlertTitle="Delete Account";
 
 
 

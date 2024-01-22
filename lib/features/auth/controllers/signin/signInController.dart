@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ymk_store/data/repositories/authentication/authentication_Repository.dart';
+import 'package:ymk_store/utils/constants/assetImage.dart';
 import 'package:ymk_store/utils/networkConnection/networkManager.dart';
+import 'package:ymk_store/utils/popup/fullScreenLoader.dart';
 
 import '../../../../utils/networkConnection/loaders.dart';
 import '../../../personalization/controllers/userController.dart';
@@ -30,15 +32,20 @@ class SignInController extends GetxController {
 
   //signin with email & pwd
   void signIn() async {
+    //start loading
+    FullScreenLoader.openLoadingDialog("Loading...", assetImage.loading1);
+
     //internet connection check
     try {
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
+        FullScreenLoader.stopLoading();
         return;
       }
 
       //form validation
       if (!SignInFormKey.currentState!.validate()) {
+        FullScreenLoader.stopLoading();
         return;
       }
 
@@ -56,29 +63,45 @@ class SignInController extends GetxController {
           .logInWithEmailAndPassword(
               email: email.text.trim(), password: password.text.trim());
 
+      FullScreenLoader.stopLoading();
+
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
+      FullScreenLoader.stopLoading();
       Loaders.errorSnackBar(title: "Oh snap!", message: e.toString());
     }
   }
 
   Future<void> googleSignIn() async {
     try {
+      //start loading
+      FullScreenLoader.openLoadingDialog("Loading...", assetImage.loading1);
+
+      //connection check
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
+        FullScreenLoader.stopLoading();
         return;
       }
 
+      //sigin with google
       final userCredential =
           await AuthenticationRepository.instance.logInWithGoogle();
 
+      //store user credential
       userController.addUserRecord(userCredential);
+
+      //after storing, stop loading
+      FullScreenLoader.stopLoading();
+
+      //screen redirect
       AuthenticationRepository.instance.screenRedirect();
 
-      localStorage.write('Remember_me_email', ' ');
-      localStorage.write('Remember_me_password', ' ');
-
+      //store email and pwd in local storage
+      localStorage.write('Remember_me_email', '');
+      localStorage.write('Remember_me_password', '');
     } catch (e) {
+      FullScreenLoader.stopLoading();
       Loaders.errorSnackBar(title: "Oh snap!", message: e.toString());
     }
   }

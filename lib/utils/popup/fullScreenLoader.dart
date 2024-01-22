@@ -20,9 +20,11 @@ class FullScreenLoader {
               const SizedBox(
                 height: 250,
               ),
-              AnimationLoaderWidget(
-                text: text,
-                animation:animation,
+              Expanded(
+                child: AnimationLoaderWidget(
+                  text: text,
+                  animation:animation,
+                ),
               ),
             ],
           ),

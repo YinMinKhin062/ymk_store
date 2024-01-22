@@ -39,7 +39,7 @@ class Loaders {
         colorText: Colors.white,
         backgroundColor: Colors.deepPurple,
         snackPosition: SnackPosition.TOP,
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 2),
         margin: const EdgeInsets.all(20),
         icon: const Icon(
           Iconsax.check,

@@ -25,7 +25,7 @@ class SignUpController extends GetxController {
   void signUp() async {
     try {
       //start loading
-      // FullScreenLoader.openLoadingDialog("Processing your info",assetImage.brandIOS);
+      // FullScreenLoader.openLoadingDialog("Loading...", assetImage.loading1);
 
       //check internet connectivity
       final isConntected = await NetworkManager.instance.isConnected();
@@ -36,17 +36,19 @@ class SignUpController extends GetxController {
 
       //form validation
       if (!signUpFormKey.currentState!.validate()) {
-
+       
         //privacy policy
-        if (!isChecked.value) {
+        return;
+      }
+
+       if (!isChecked.value) {
           Loaders.warningSnackBar(
               title: "Accept Privacy Policy",
               message:
                   "In order to create account, you must read and accept privacy policy.");
-        }
 
-        return;
-      }
+          return;
+        }
 
       //sigup with email and password
       final userCredential = await AuthenticationRepository.instance
@@ -64,13 +66,13 @@ class SignUpController extends GetxController {
       final userRepositories = Get.put(UserRepositories());
       await userRepositories.addUser(newUser);
 
-     
+      // FullScreenLoader.stopLoading();
 
       //show success msg
-      Loaders.successSnackBar(title: "Congratulations!",message: "Your account has been created");
+      Loaders.successSnackBar(
+          title: "Congratulations!", message: "Your account has been created");
 
-      Get.to(()=> VeriyEmailScreen(email:email.text.trim()));
-
+      Get.to(() => VeriyEmailScreen(email: email.text.trim()));
     } catch (e) {
       // FullScreenLoader.stopLoading();
       Loaders.errorSnackBar(title: 'On Snap!', message: e.toString());

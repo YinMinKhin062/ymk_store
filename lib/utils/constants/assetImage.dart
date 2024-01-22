@@ -73,5 +73,8 @@ static const String orderSuccessImg="assets/images/onboarding/successfulOrder.pn
 static const String productEarbuds="https://image-us.samsung.com/us/mobile-audio/galaxy-buds2/images/galaxy-buds2-noise-canceling.jpg";
 static const String productiOsEarbuds="https://www.apple.com/v/airpods/shared/compare/d/images/compare/compare_airpods_pro__e9uzt0mzviem_large_2x.png";
 
+//loading json
+static const String loading1="assets/images/onboarding/shoploading.gif";
+
 
 }

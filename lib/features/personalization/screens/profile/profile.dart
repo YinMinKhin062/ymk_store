@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ymk_store/common/widgets/customShapes/containers/circularContainer.dart';
 import 'package:ymk_store/common/widgets/homeWidget/appbar.dart';
 import 'package:ymk_store/common/widgets/text/headerSection.dart';
+import 'package:ymk_store/features/personalization/controllers/userController.dart';
+import 'package:ymk_store/features/personalization/screens/profile/widget/reAuth_UserLogin.dart';
 import 'package:ymk_store/utils/constants/assetImage.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 
 import '../../../../common/widgets/personalWidgets/profileImage.dart';
 import '../../../../common/widgets/personalWidgets/profileMenu.dart';
 import '../../../../utils/theme/custom_themes/sizes.dart';
+import 'changeName.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(UserController());
     return Scaffold(
-      appBar:  CustomAppBar(
-        title: Text("Profile",style:Theme.of(context).textTheme.headlineSmall),
+      appBar: CustomAppBar(
+        title:
+            Text("Profile", style: Theme.of(context).textTheme.headlineSmall),
         showBackArrow: true,
       ),
       body: SingleChildScrollView(
@@ -32,9 +38,7 @@ class Profile extends StatelessWidget {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: () {
-                     
-                    },
+                    onTap: () {},
                     child: Stack(
                       clipBehavior: Clip.none,
                       children: const [
@@ -89,8 +93,10 @@ class Profile extends StatelessWidget {
 
             ProfileMenu(
               nameTitle: TxtContents.nameTitle,
-              nameValue: TxtContents.nameValue,
-              onPressed: () {},
+              nameValue: controller.user.value.userName,
+              onPressed: () {
+                Get.to(() => const ChangeName());
+              },
             ),
 
             //Personal Information
@@ -107,18 +113,18 @@ class Profile extends StatelessWidget {
 
             ProfileMenu(
               nameTitle: TxtContents.userIDTitle,
-              nameValue: TxtContents.userIDValue,
+              nameValue: controller.user.value.id,
               icon: Iconsax.copy,
               onPressed: () {},
             ),
             ProfileMenu(
               nameTitle: TxtContents.emailTitle,
-              nameValue: TxtContents.emailValue,
+              nameValue: controller.user.value.email,
               onPressed: () {},
             ),
             ProfileMenu(
               nameTitle: TxtContents.phoneNoTitle,
-              nameValue: TxtContents.phonenoValue,
+              nameValue: controller.user.value.phoneno,
               onPressed: () {},
             ),
             ProfileMenu(
@@ -140,7 +146,9 @@ class Profile extends StatelessWidget {
             // child:
             Center(
                 child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      controller.deleteWarningPopUp();
+                    },
                     child: Text(
                       TxtContents.closeAccTxt,
                       style: Theme.of(context)

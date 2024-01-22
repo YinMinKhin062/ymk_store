@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ymk_store/features/personalization/screens/profile/profile.dart';
 
+import '../../../features/personalization/controllers/userController.dart';
 import '../../../utils/constants/txtContents.dart';
 import '../../../utils/constants/assetImage.dart';
 import '../personalWidgets/profileImage.dart';
@@ -13,25 +14,32 @@ class UserProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = UserController.instance;
     return GestureDetector(
       onTap: () => Get.to(const Profile()),
       child: ListTile(
         leading: const ProfileImage(
           imageName: assetImage.user3,
         ),
-        title: Text(
-          TxtContents.accountName,
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
-              .apply(color: Colors.white),
+        title: Obx(
+          () => Text(
+            controller.user.value.userName,
+            // TxtContents.accountName,
+            style: Theme.of(context)
+                .textTheme
+                .headlineSmall!
+                .apply(color: Colors.white),
+          ),
         ),
-        subtitle: Text(
-          TxtContents.accountEmail,
-          style: Theme.of(context)
-              .textTheme
-              .labelMedium!
-              .apply(color: Colors.white),
+        subtitle: Obx(
+          () => Text(
+            // TxtContents.accountEmail,
+            controller.user.value.email,
+            style: Theme.of(context)
+                .textTheme
+                .labelMedium!
+                .apply(color: Colors.white),
+          ),
         ),
         trailing: IconButton(
           onPressed: onPressed,
