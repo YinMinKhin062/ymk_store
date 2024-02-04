@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ymk_store/common/widgets/homeWidget/appbar.dart';
-import 'package:ymk_store/features/auth/screens/fogotPasscode/resetPassword.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 import 'package:ymk_store/utils/validators/validation.dart';
 
@@ -25,7 +24,7 @@ class _ForgotPasscodeState extends State<ForgotPasscode> {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
-        appBar:const  CustomAppBar(
+        appBar:const CustomAppBar(
           title:Text(""),
           showBackArrow: true,
           

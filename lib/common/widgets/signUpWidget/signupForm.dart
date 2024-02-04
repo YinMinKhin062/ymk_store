@@ -5,7 +5,6 @@ import 'package:ymk_store/common/widgets/signUpWidget/termsAndConditions.dart';
 import 'package:ymk_store/features/auth/controllers/signup/signupController.dart';
 import 'package:ymk_store/utils/validators/validation.dart';
 
-import '../../../features/auth/screens/SignUp/verifyEmail.dart';
 import '../../../utils/constants/txtContents.dart';
 import '../../../utils/theme/custom_themes/sizes.dart';
 

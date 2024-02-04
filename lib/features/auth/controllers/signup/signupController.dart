@@ -1,14 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ymk_store/data/repositories/authentication/authentication_Repository.dart';
 import 'package:ymk_store/data/repositories/user/user_repositories.dart';
 import 'package:ymk_store/features/auth/models/user/userModel.dart';
 import 'package:ymk_store/features/auth/screens/SignUp/verifyEmail.dart';
-import 'package:ymk_store/utils/constants/assetImage.dart';
 import 'package:ymk_store/utils/networkConnection/loaders.dart';
 import 'package:ymk_store/utils/networkConnection/networkManager.dart';
-import 'package:ymk_store/utils/popup/fullScreenLoader.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get instance => Get.find();

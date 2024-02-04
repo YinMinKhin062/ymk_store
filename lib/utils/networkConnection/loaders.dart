@@ -18,6 +18,27 @@ class Loaders {
         ));
   }
 
+  static customToast({required message}) {
+    ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
+        elevation: 0,
+        duration: const Duration(seconds: 3),
+        backgroundColor: Colors.transparent,
+        content: Container(
+          padding: const EdgeInsets.all(12),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: Colors.grey.withOpacity(.9),
+          ),
+          child: Center(
+            child: Text(
+              message,
+              style: Theme.of(Get.context!).textTheme.labelLarge,
+            ),
+          ),
+        )));
+  }
+
   static errorSnackBar({required title, message = ''}) {
     Get.snackbar(title, message,
         isDismissible: true,
@@ -32,6 +53,7 @@ class Loaders {
           color: Colors.white,
         ));
   }
+
   static successSnackBar({required title, message = ''}) {
     Get.snackbar(title, message,
         isDismissible: true,
@@ -46,6 +68,4 @@ class Loaders {
           color: Colors.white,
         ));
   }
-
-
 }

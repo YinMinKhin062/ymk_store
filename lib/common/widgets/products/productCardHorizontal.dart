@@ -5,17 +5,25 @@ import 'package:ymk_store/common/widgets/homeWidget/curvedImage.dart';
 import 'package:ymk_store/common/widgets/products/brandNameWithVerify.dart';
 import 'package:ymk_store/common/widgets/text/productPriceTxt.dart';
 import 'package:ymk_store/common/widgets/text/productTitleText.dart';
+import 'package:ymk_store/features/shop/controlllers/productController.dart';
+import 'package:ymk_store/features/shop/models/productModel.dart';
 import 'package:ymk_store/utils/constants/assetImage.dart';
 
 import '../../../utils/constants/txtContents.dart';
 import '../../../utils/theme/custom_themes/sizes.dart';
 import '../homeWidget/circularIcon.dart';
+import 'favouriteIcon.dart';
 
 class ProductCardHorizontal extends StatelessWidget {
-  const ProductCardHorizontal({super.key});
+  const ProductCardHorizontal({super.key,required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller=ProductController.instance;
+    final discountpercent=controller.calculateSalePercent(product.price,product.salePrice);
+
     return Container(
       width: 310,
       padding: const EdgeInsets.all(1),
@@ -31,20 +39,21 @@ class ProductCardHorizontal extends StatelessWidget {
         children: [
           CircularContainer(
             height: 110,
-            padding:const EdgeInsets.all(Sizes.sm),
+            padding: const EdgeInsets.all(Sizes.sm),
             child: Stack(
               clipBehavior: Clip.none,
               children: [
                 //thumbnail img
-                const CurvedImage(
+                 CurvedImage(
                   width: 120,
                   height: 110,
                   isNetworkImg: true,
-                  imgPath: assetImage.productiOsEarbuds,
+                  imgPath: product.thumbnail,
                   fit: BoxFit.contain,
                 ),
                 //sale tag
                 // discount tag
+                if(double.parse(discountpercent!)>0)
                 Positioned(
                   top: 3,
                   // left: 3,
@@ -57,7 +66,7 @@ class ProductCardHorizontal extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: Sizes.sm, vertical: Sizes.xs),
                     child: Text(
-                      TxtContents.discountPercentTxt,
+                      "-${discountpercent} %",
                       style: Theme.of(context)
                           .textTheme
                           .labelSmall!
@@ -66,17 +75,19 @@ class ProductCardHorizontal extends StatelessWidget {
                   ),
                 ),
                 //wishlist
-                Positioned(
+                 Positioned(
                     right: 0, //.8
                     top: -7,
-                    child: CircularIcon(
-                      showBorder: false,
-                      color: Colors.white,
-                      icon: Iconsax.heart5,
-                      iconColor: Colors.red,
-                      size: Sizes.lg,
-                      onPressed: () {},
-                    )),
+                    child: FavouriteIcon(productId: product.id,)
+                    // child: CircularIcon(
+                    //   showBorder: false,
+                    //   color: Colors.white,
+                    //   icon: Iconsax.heart5,
+                    //   iconColor: Colors.red,
+                    //   size: Sizes.lg,
+                    //   onPressed: () {},
+                    // )
+                    ),
               ],
             ),
           ),
@@ -89,15 +100,15 @@ class ProductCardHorizontal extends StatelessWidget {
                   padding: const EdgeInsets.only(top: Sizes.sm, left: Sizes.sm),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children:  [
                       ProductTitleTxt(
-                        productTitle: "AirPods Pro\n2nd generation (USB-C)",
+                        productTitle: product.title,
                         maxLines: 2,
                       ),
-                      SizedBox(
+                     const SizedBox(
                         height: Sizes.spaceBetween / 2,
                       ),
-                      BrandNameWithVerify(brandName: TxtContents.brandIOS)
+                      BrandNameWithVerify(brandName: product.brand!=null? product.brand!.name:'')
                     ],
                   ),
                 ),
@@ -111,12 +122,33 @@ class ProductCardHorizontal extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       //price
-                      const Flexible(
-                          child: ProductPriceTxt(
-                        currency: "Ks",
-                        price: "747,000",
-                        isLarge: false,
-                      )),
+                       Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (product.salePrice > 0)
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: Sizes.sm),
+                                  child: Text(
+                                    "\$${product.price}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelSmall!
+                                        .apply(
+                                            decoration:
+                                                TextDecoration.lineThrough),
+                                  ),
+                                ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: Sizes.sm),
+                                child: ProductPriceTxt(
+                                    currency: "\$",
+                                    price: product.salePrice.toString()),
+                              ),
+                            ],
+                          ),
+                        ),
                       //add to cart
                       Container(
                         decoration: const BoxDecoration(

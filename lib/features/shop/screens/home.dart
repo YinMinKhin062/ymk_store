@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,8 +7,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:ymk_store/common/widgets/homeWidget/homeCategories.dart';
 import 'package:ymk_store/common/widgets/customShapes/containers/headerContainer.dart';
 import 'package:ymk_store/common/widgets/text/headerSection.dart';
+import 'package:ymk_store/features/shop/controlllers/productController.dart';
 import 'package:ymk_store/features/shop/screens/allProducts/allProducts.dart';
-import 'package:ymk_store/utils/constants/assetImage.dart';
+import 'package:ymk_store/utils/Loading/verticalProductShimmer.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 import '../../../common/widgets/homeWidget/homeAppBar.dart';
 import '../../../common/widgets/homeWidget/homePromoSlider.dart';
@@ -21,6 +23,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final productController = Get.put(ProductController());
+
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -32,6 +36,7 @@ class Home extends StatelessWidget {
             children: [
               //header
               HeaderContainer(
+                height: 360,
                 child: Column(
                   children: const [
                     //app bar
@@ -42,7 +47,7 @@ class Home extends StatelessWidget {
                     ),
 
                     SizedBox(
-                      height: Sizes.spaceBetweenSections,
+                      height: Sizes.spaceBetween,
                     ),
 
                     //search bar
@@ -72,11 +77,13 @@ class Home extends StatelessWidget {
                 child: Column(
                   children: [
                     //image carousel_slider
-                    const HomePromoSlider(banners: [
-                      assetImage.carouselImg2,
-                      assetImage.carouselImg4,
-                      assetImage.carouselImg1
-                    ]),
+                    const HomePromoSlider(
+                        // banners: [
+                        // assetImage.carouselImg2,
+                        // assetImage.carouselImg4,
+                        // assetImage.carouselImg1
+                        // ]
+                        ),
 
                     const SizedBox(
                       height: Sizes.spaceBetweenSections,
@@ -87,9 +94,18 @@ class Home extends StatelessWidget {
                       title: TxtContents.featuredProductTxt,
                       btnTitle: TxtContents.viewAllBtnTxt,
                       showActionBtn: true,
-                      txtColor: Colors.black,
                       btnTxtColor: Colors.black.withOpacity(.5),
-                      onPressed: () {Get.to(()=>const AllProducts());},
+                      onPressed: () {
+                        Get.to(() => AllProducts(
+                              title: TxtContents.productsTxt,
+                              query: FirebaseFirestore.instance
+                                  .collection('Products')
+                                  .where('IsFeatured', isEqualTo: true)
+                                  .limit(2),
+                              futureMethod:
+                                  productController.fetchAllProducts(),
+                            ));
+                      },
                     ),
 
                     const SizedBox(
@@ -97,12 +113,24 @@ class Home extends StatelessWidget {
                     ),
 
                     //product grid view vertical
-                    GridLayout(
-                      itemCount: 4,
-                      mainAxisExtent: 282,
-                      itemBuilder: (BuildContext, int) =>
-                          const ProductCartVertical(),
-                    ),
+                    Obx(() {
+                      if (productController.isLoading.value) {
+                        return VerticalProductShimmer(
+                          itemCount: productController.featuredProducts.length,
+                        );
+                      }
+                      if (productController.featuredProducts.isEmpty) {
+                        return const Text("No Data Found!");
+                      } else {
+                        return GridLayout(
+                          itemCount: productController.featuredProducts.length,
+                          mainAxisExtent: 282,
+                          itemBuilder: (_, index) => ProductCartVertical(
+                            product: productController.featuredProducts[index],
+                          ),
+                        );
+                      }
+                    })
                   ],
                 ),
               ),

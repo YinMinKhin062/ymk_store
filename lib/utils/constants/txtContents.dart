@@ -113,6 +113,9 @@ class TxtContents {
   static const String brandRemax = "Remax";
   static const String brandIOS = "Apple";
   static const String brandMi = "Mi";
+  static const String brandVivo = "Vivo";
+  static const String brandOppo = "Oppo";
+  static const String brandInfinix = "Infinix";
 
 //store
   static const String storeAppBarTitle = "Store";
@@ -163,11 +166,22 @@ class TxtContents {
   static const String accountSubtitleTxt =
       "Manage data usage & account privacy";
 
+  static const String loadDataTxt = "Load Data";
+  static const String loadDataSubtitleTxt = "Load your data";
+
   static const String locationTxt = "Geolocation";
   static const String locationSubtitleTxt = "Use my current location";
 
   static const String imgQualityTxt = "HD Image Quaility";
   static const String imgQualitySubtitleTxt = "Set image quality to be seen";
+
+  static const String uploadCategotyTxt = "Upload Category";
+  static const String uploadBannerTxt = "Upload Banners";
+  static const String uploadBrandTxt = "Upload Brands";
+  static const String uploadProductTxt = "Upload Products";
+  static const String uploadBrandCategoryTxt = "Upload Brand for Category";
+  static const String uploadProductCategoryTxt = "Upload Product for Category";
+  
 
   //profile info
   static const String personalInfo="Personal Information";
@@ -263,7 +277,19 @@ static const String cancelTxt="Cancel";
 static const String deleteAlertBody="Are you sure you want to delete your account permanently?";
 static const String deleteAlertTitle="Delete Account";
 
+//change profile pic
+static const uploadedTxt="Uploaded";
+static const uploadedMsg="Your profile picture is upload.";
 
+//upload data
+static const uploadDataTxt="Upload Data";
+
+//products
+static const product001="Galaxy S24 Ultra";
+static const productDesc001="The Galaxy S24 Ultra features a large and high-resolution Dynamic AMOLED display with a high refresh rate (120Hz or more) for smoother scrolling and animations, a powerful and efficient processor (likely an upgraded Exynos or Snapdragon chipset), multiple rear cameras with high megapixel counts, improved low-light performance, and enhanced zoom capabilities, along with advanced camera features and AI enhancements. It boasts a large battery capacity for extended usage, fast charging technology (possibly 45W or higher), wireless charging, and reverse wireless charging support, paired with generous storage options (128GB, 256GB, or more) and ample RAM for smooth multitasking. Its connectivity includes 5G support for faster data speeds, Wi-Fi 6 or Wi-Fi 6E for improved wireless connectivity, and USB Type-C for charging and data transfer. Running on the Android OS with the latest Samsung One UI, the device is designed with premium build materials, featuring a sleek and modern design with water and dust resistance (IP68 rating). Security features include an in-display fingerprint sensor and facial recognition technology, and additional features encompass S Pen support (if applicable), enhanced audio quality, and display improvements such as HDR support.";
+
+static const product002="Apple 15Pro Max";
+static const productDesc002="The iPhone 15 Pro Max comes with 6.7-inch OLED display with 120Hz refresh rate and Apple's improved A17 Pro processor. On the back there is a Triple camera setup with 48MP main camera and the prices start at \$1199.";
 
 
   

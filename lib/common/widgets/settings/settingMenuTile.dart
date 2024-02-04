@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 
 class SettingMenuTile extends StatelessWidget {
-  final String menuTitle,menuSubtitle;
+  final String menuTitle;
+  final String menuSubtitle;
   final IconData icon;
   final Widget ?trailing;
   final VoidCallback? onTap;

@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ymk_store/data/repositories/authentication/authentication_Repository.dart';
 import 'package:ymk_store/features/auth/models/user/userModel.dart';
 
@@ -15,7 +18,7 @@ class UserRepositories extends GetxController {
       await _db.collection("Users").doc(user.id).set(user.toJson());
     } on FirebaseException catch (e) {
       throw e.code;
-    } catch (e) {}
+    }
   }
 
   //fetch user in firestore
@@ -65,6 +68,7 @@ class UserRepositories extends GetxController {
     }
   }
 
+//remove user
   Future<void> removeUser(String userId) async {
     try {
       await _db.collection("Users").doc(userId).delete();
@@ -73,5 +77,23 @@ class UserRepositories extends GetxController {
     } catch (e) {
       throw e.toString();
     }
+  }
+
+  //upload image
+  Future<String> uploadImage(String path,XFile image) async{
+    try{
+      //create a reference to the file
+       final ref= FirebaseStorage.instance.ref().child(path).child(image.name);
+       await ref.putFile(File(image.path));
+       final url=await ref.getDownloadURL();
+       return url;
+    
+    }on FirebaseException catch(e){
+      throw e.code;
+    }
+    catch(e){
+      throw "Something went wrong. Please try again";
+    }
+     
   }
 }

@@ -1,37 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:ymk_store/features/shop/controlllers/product/imagesController.dart';
+import 'package:ymk_store/features/shop/models/productModel.dart';
 
 import '../../../../../common/widgets/customShapes/curvedEdges/curvedEdgesWidget.dart';
 import '../../../../../common/widgets/homeWidget/appbar.dart';
 import '../../../../../common/widgets/homeWidget/circularIcon.dart';
 import '../../../../../common/widgets/homeWidget/curvedImage.dart';
+import '../../../../../common/widgets/products/favouriteIcon.dart';
 import '../../../../../utils/theme/custom_themes/sizes.dart';
-import '../../../../../utils/constants/assetImage.dart';
 
 class ProductImageSlider extends StatelessWidget {
-  const ProductImageSlider({super.key});
+  const ProductImageSlider({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ImageController());
+    final images = controller.getProductImages(product);
+
     return CurvedEdgesWidget(
       child: Container(
-        decoration: BoxDecoration(
-          color: Colors.deepPurple.withOpacity(.1),
-            // color: Colors.white, border: Border.all(color: Colors.grey)
-            ),
+        decoration: const BoxDecoration(
+          // color: Colors.deepPurple.withOpacity(.1),
+          color: Colors.white,
+        ),
         child: Column(
           children: [
             Stack(
               children: [
                 //image
-                const SizedBox(
+                SizedBox(
                     height: 400, //400
                     child: Padding(
-                      padding: EdgeInsets.all(Sizes.productImageRadius * 2),
-                      child: Center(
-                          child: Image(
-                              image:
-                                  AssetImage(assetImage.productSmartWatch6))),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: Sizes.productImageRadius * 3,
+                          horizontal: Sizes.productImageRadius * 3.5),
+                      child: Center(child: Obx(() {
+                        final image = controller.currentProductImage.value;
+                        return GestureDetector(
+                          onTap: () => controller.showEnlargedImage(image),
+                          child: CurvedImage(
+                            isNetworkImg: true,
+                            imgPath: image,
+                            fit: BoxFit.contain,
+                          ),
+                          // child: CachedNetworkImage(
+                          //   imageUrl: image,
+                          //   progressIndicatorBuilder: (_, __, progress) =>
+                          //       CircularProgressIndicator(
+                          //     value: progress.progress,
+                          //     color: Colors.deepPurple,
+                          //   ),
+                          // ),
+                        );
+                      })),
                     )),
 
                 //slider
@@ -46,18 +71,30 @@ class ProductImageSlider extends StatelessWidget {
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       physics: const AlwaysScrollableScrollPhysics(),
-                      itemCount: 6,
+                      itemCount: images.length,
                       separatorBuilder: (_, __) => const SizedBox(
                         width: Sizes.spaceBetween,
                       ),
-                      itemBuilder: (context, index) => CurvedImage(
+                      itemBuilder: (context, index) => Obx(() {
+                        final currentImage =
+                            controller.currentProductImage.value ==
+                                images[index];
+                        return CurvedImage(
+                          imgBorderRadius: Sizes.spaceBetweenSections,
+                          cardRadius: Sizes.spaceBetween,
                           isNetworkImg: true,
                           width: 80,
-                          bgColor: Colors.white,
-                          padding: const EdgeInsets.all(Sizes.sm),
-                          border:
-                              Border.all(color: Colors.grey.withOpacity(.2)),
-                          imgPath: assetImage.productSmartWatch0),
+                          bgColor: const Color.fromRGBO(255, 255, 255, 1),
+                          padding: const EdgeInsets.all(Sizes.sm / 2),
+                          border: Border.all(
+                              color: currentImage
+                                  ? Colors.deepPurple
+                                  : Colors.grey.withOpacity(.2)),
+                          imgPath: images[index],
+                          onTap: () => controller.currentProductImage.value =
+                              images[index],
+                        );
+                      }),
                     ),
                   ),
                 ),
@@ -66,12 +103,10 @@ class ProductImageSlider extends StatelessWidget {
                 CustomAppBar(
                   showBackArrow: true,
                   actions: [
-                    CircularIcon(
-                      icon: Iconsax.heart5,
-                      iconColor: Colors.red,
-                      showBorder: false,
-                      onPressed: () {},
-                    ),
+                    //wishlist icon
+                     FavouriteIcon(productId: product.id,),
+                    
+                    //shared btn
                     IconButton(
                         onPressed: () {},
                         icon: const Icon(
@@ -82,9 +117,6 @@ class ProductImageSlider extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
-              height: Sizes.spaceBetween,
-            )
           ],
         ),
       ),

@@ -13,6 +13,7 @@ class NetworkManager extends GetxController {
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
   final Rx<ConnectivityResult> _connectionStatus = ConnectivityResult.none.obs;
 
+  @override
   void onInit() {
     super.onInit();
     _connectivitySubscription =

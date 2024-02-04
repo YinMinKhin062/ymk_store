@@ -12,7 +12,8 @@ class ProfileImage extends StatelessWidget {
       required this.imageName,
       this.width = 55,
       this.height = 55,
-      this.bgColor = Colors.white,this.padding=2.0});
+      this.bgColor = Colors.white,
+      this.padding = 2.0});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +22,10 @@ class ProfileImage extends StatelessWidget {
       height: height,
       bgColor: bgColor,
       child: Padding(
-        padding:  EdgeInsets.all(padding),
+        padding: EdgeInsets.all(padding),
         child: CircleAvatar(
           backgroundImage: NetworkImage(imageName),
+          // backgroundImage:Image(image:NetworkImage(imageName) ) as ImageProvider,
           radius: 40,
         ),
       ),

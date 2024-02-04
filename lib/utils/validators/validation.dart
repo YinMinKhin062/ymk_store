@@ -57,7 +57,7 @@ class MyValidator {
     }
 
     // final phonenoRegExp = RegExp(r'\d{9}^$');
-    final phonenoRegExp = RegExp(r'^[\+]?[0-9]{9}$');
+    final phonenoRegExp = RegExp(r'^[\+]?[0-9]{7,12}$');
 
     if (!phonenoRegExp.hasMatch(value)) {
       return "Invalid phone number format(9 digits required)";

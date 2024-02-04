@@ -5,29 +5,28 @@ import 'package:ymk_store/common/widgets/customShapes/containers/headerContainer
 import 'package:ymk_store/common/widgets/settings/userProfileTile.dart';
 import 'package:ymk_store/common/widgets/text/headerSection.dart';
 import 'package:ymk_store/data/repositories/authentication/authentication_Repository.dart';
-import 'package:ymk_store/features/personalization/controllers/userController.dart';
 import 'package:ymk_store/features/personalization/screens/address/addressScreen.dart';
 import 'package:ymk_store/features/personalization/screens/profile/profile.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 
 import '../../../../common/widgets/settings/settingMenuTile.dart';
 import '../../../../utils/theme/custom_themes/sizes.dart';
-import '../../../auth/screens/loginScreen.dart';
 import '../../../personalization/screens/cart/cart.dart';
 import '../../../personalization/screens/order/order.dart';
+import '../../../personalization/screens/uploadData/uploadData.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       body: SingleChildScrollView(
           child: Column(
         children: [
           //header
           HeaderContainer(
+            height: 160,
             child: Column(
               children: [
                 // CustomAppBar(
@@ -71,7 +70,7 @@ class Settings extends StatelessWidget {
                   menuTitle: TxtContents.addressTxt,
                   menuSubtitle: TxtContents.addressSubtitleTxt,
                   onTap: () {
-                    Get.to(()=>const AddressScreen());
+                    Get.to(() => const AddressScreen());
                   },
                 ),
                 //cart
@@ -80,7 +79,7 @@ class Settings extends StatelessWidget {
                   menuTitle: TxtContents.cartTxt,
                   menuSubtitle: TxtContents.cartSubtitleTxt,
                   onTap: () {
-                    Get.to(()=>const Cart());
+                    Get.to(() => const Cart());
                   },
                 ),
                 //orders
@@ -89,7 +88,7 @@ class Settings extends StatelessWidget {
                   menuTitle: TxtContents.orderTxt,
                   menuSubtitle: TxtContents.orderSubtitleTxt,
                   onTap: () {
-                    Get.to(()=>const Order());
+                    Get.to(() => const Order());
                   },
                 ),
                 SettingMenuTile(
@@ -127,6 +126,14 @@ class Settings extends StatelessWidget {
                 const SizedBox(
                   height: Sizes.spaceBetween,
                 ),
+
+                //upload data
+                 SettingMenuTile(
+                    menuTitle: TxtContents.loadDataTxt,
+                    menuSubtitle: TxtContents.loadDataSubtitleTxt,
+                    icon: Iconsax.document_upload,onTap: () {
+                      Get.to(()=>const UploadData());
+                    },),
 
                 SettingMenuTile(
                   icon: Iconsax.location,
@@ -168,12 +175,12 @@ class Settings extends StatelessWidget {
                   width: double.infinity,
                   child: OutlinedButton(
                     onPressed: () {
-                        AuthenticationRepository.instance.logOut();
-                        // AuthenticationRepository.instance.screenRedirect();
-                        // Get.offAll(const Login());
+                      AuthenticationRepository.instance.logOut();
+                      // AuthenticationRepository.instance.screenRedirect();
+                      // Get.offAll(const Login());
                     },
                     style: OutlinedButton.styleFrom(
-                        padding:const EdgeInsets.symmetric(vertical: 14)),
+                        padding: const EdgeInsets.symmetric(vertical: 14)),
                     child: Text(
                       "Logout",
                       style: Theme.of(context).textTheme.bodyMedium,

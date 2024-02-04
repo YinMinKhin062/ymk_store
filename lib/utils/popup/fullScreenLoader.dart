@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:ymk_store/utils/constants/assetImage.dart';
 
 import 'animationLoaderWidget.dart';
 

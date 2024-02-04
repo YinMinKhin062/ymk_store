@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
-import 'package:ymk_store/features/auth/screens/onboarding.dart';
-import 'package:ymk_store/utils/constants/assetImage.dart';
+import 'package:ymk_store/routes/appRoutes.dart';
 import 'package:ymk_store/utils/theme/theme.dart';
 
 import 'bindings/generalBindings.dart';
@@ -19,6 +18,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
+      getPages: AppRoutes.pages,
       initialBinding: GeneralBindings(),
       home: const Scaffold(
         backgroundColor: Colors.deepPurple,

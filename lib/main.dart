@@ -7,6 +7,7 @@ import 'package:ymk_store/data/repositories/authentication/authentication_Reposi
 
 import 'firebase_options.dart';
 import 'myapp.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 
 Future<void> main() async {
   //widget bindings to use splash screen
@@ -23,6 +24,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   ).then((FirebaseApp value) => Get.put(AuthenticationRepository()));
+
+  //initialize app check
+  await FirebaseAppCheck.instance.activate(
+      androidProvider: AndroidProvider.debug,);
 
   runApp(const MyApp());
 }

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/repositories/authentication/authentication_Repository.dart';
@@ -12,6 +11,7 @@ import '../../screens/SignUp/successScreen.dart';
 
 class VerifyEmailController extends GetxController {
   static VerifyEmailController get instance => Get.find();
+  @override
   void onInit() {
     super.onInit();
     sendEmailVerification(); //send email

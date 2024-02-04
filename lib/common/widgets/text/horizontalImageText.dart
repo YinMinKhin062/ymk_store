@@ -29,8 +29,9 @@ class HorizontalImageText extends StatelessWidget {
                 color: Colors.white,
               ),
               child:  Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(Sizes.sm-2),
                 child: CircleAvatar(
+                  backgroundColor: Colors.white,
                     backgroundImage: isNetworkImg? NetworkImage(image):AssetImage(image) as ImageProvider),
               ),
             ),

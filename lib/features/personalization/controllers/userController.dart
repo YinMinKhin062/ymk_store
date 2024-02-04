@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ymk_store/data/repositories/authentication/authentication_Repository.dart';
 import 'package:ymk_store/data/repositories/user/user_repositories.dart';
 import 'package:ymk_store/features/auth/models/user/userModel.dart';
@@ -34,18 +34,25 @@ class UserController extends GetxController {
     fetchUser();
   }
 
+  //save user
   Future<void> addUserRecord(UserCredential? userCredential) async {
     try {
-      if (userCredential != null) {
-        final newUser = UserModel(
-            id: userCredential.user!.uid,
-            userName: userCredential.user!.displayName ?? '',
-            email: userCredential.user!.email ?? '',
-            phoneno: userCredential.user!.phoneNumber ?? '',
-            profilepic: userCredential.user!.photoURL ?? '');
+      //fetch user record
+      await fetchUser();
 
-        //add user data to firebase
-        userRepositories.addUser(newUser);
+      //if no user record, stored
+      if (user.value.id.isEmpty) {
+        if (userCredential != null) {
+          final newUser = UserModel(
+              id: userCredential.user!.uid,
+              userName: userCredential.user!.displayName ?? '',
+              email: userCredential.user!.email ?? '',
+              phoneno: userCredential.user!.phoneNumber ?? '',
+              profilepic: userCredential.user!.photoURL ?? '');
+
+          //add user data to firebase
+          userRepositories.addUser(newUser);
+        }
       }
     } catch (e) {
       Loaders.warningSnackBar(
@@ -53,9 +60,10 @@ class UserController extends GetxController {
     }
   }
 
+//fetch user
   Future<void> fetchUser() async {
     try {
-      profileLoading.value = true;
+      profileLoading.value = true; // when fetch, will have profile loading
       final user = await userRepositories.fetchUser();
       this.user(user);
     } catch (e) {
@@ -110,7 +118,7 @@ class UserController extends GetxController {
   //delete user account
   deleteUserAccount() async {
     try {
-      FullScreenLoader.openLoadingDialog("Loading", assetImage.loading1);
+      FullScreenLoader.openLoadingDialog("Deleting...", assetImage.loading1);
 
       //first re-auth user
       final auth = AuthenticationRepository.instance;
@@ -138,9 +146,10 @@ class UserController extends GetxController {
     }
   }
 
+  //reauth
   Future<void> reAuthEmailAndPwd() async {
     try {
-      FullScreenLoader.openLoadingDialog("Loading...", assetImage.loading1);
+      FullScreenLoader.openLoadingDialog("Deleting...", assetImage.loading1);
 
       //check internet
       final isConnected = await NetworkManager.instance.isConnected();
@@ -167,6 +176,37 @@ class UserController extends GetxController {
     } catch (e) {
       FullScreenLoader.stopLoading();
       Loaders.warningSnackBar(title: "Oh Snap!", message: e.toString());
+    }
+  }
+
+  //upload pic
+  uploadUserProfilePic() async {
+    try {
+      final image = await ImagePicker().pickImage(
+          source: ImageSource.gallery,
+          imageQuality: 70,
+          maxHeight: 512,
+          maxWidth: 512);
+      if (image != null) {
+        profileLoading.value = true; //will have profile loading
+        final imageUrl = await userRepositories.uploadImage(
+            'Users/Images/Profile/', image); //store image in firestorage
+        Map<String, dynamic> profilePic = {'ProfilePicture': imageUrl};
+        await userRepositories
+            .updateUserfield(profilePic); //store image in user's record
+
+        ///Rx value update
+        user.value.profilepic = imageUrl;
+        user.refresh();
+        //success msg
+        Loaders.successSnackBar(
+            title: TxtContents.uploadedTxt, message: TxtContents.uploadedMsg);
+      }
+    } catch (e) {
+      Loaders.errorSnackBar(
+          title: "On Snap!", message: "Something went wrong. $e");
+    } finally {
+      profileLoading.value = false;
     }
   }
 }

@@ -7,26 +7,30 @@ import 'package:ymk_store/common/widgets/homeWidget/circularIcon.dart';
 import 'package:ymk_store/common/widgets/homeWidget/curvedImage.dart';
 import 'package:ymk_store/common/widgets/products/brandNameWithVerify.dart';
 import 'package:ymk_store/common/widgets/text/productPriceTxt.dart';
-import 'package:ymk_store/utils/constants/assetImage.dart';
-import 'package:ymk_store/utils/constants/txtContents.dart';
+import 'package:ymk_store/features/shop/controlllers/productController.dart';
 
+import '../../../features/shop/models/productModel.dart';
 import '../../../features/shop/screens/product details/productDetails.dart';
 import '../../../utils/theme/custom_themes/sizes.dart';
 import '../text/productTitleText.dart';
+import 'favouriteIcon.dart';
 
-class ProductCartVertical extends StatefulWidget {
-  const ProductCartVertical({super.key});
+class ProductCartVertical extends StatelessWidget {
+  const ProductCartVertical({super.key, required this.product});
 
-  @override
-  State<ProductCartVertical> createState() => _ProductCartVerticalState();
-}
-
-class _ProductCartVerticalState extends State<ProductCartVertical> {
+  final ProductModel product;
   // bool showWishlist=false;
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+
+    final discountpercent =
+        controller.calculateSalePercent(product.price, product.salePrice);
+
     return GestureDetector(
-        onTap: () => Get.to(const ProductDetail()),
+        onTap: () => Get.to(ProductDetail(
+              product: product,
+            )),
         child: Container(
           width: 180,
           padding: const EdgeInsets.all(1),
@@ -45,7 +49,7 @@ class _ProductCartVerticalState extends State<ProductCartVertical> {
 
               CircularContainer(
                 height: 155, //155
-                width:130,
+                width: 130,
                 radius: 8,
                 bgColor: Colors.white.withOpacity(.8),
                 padding: const EdgeInsets.all(Sizes.sm),
@@ -54,58 +58,56 @@ class _ProductCartVerticalState extends State<ProductCartVertical> {
                   clipBehavior: Clip.none,
                   children: [
                     //thumbnail image
-                        const CurvedImage(
-                          height: 145,
-                         
-                            fit: BoxFit.contain,
-                            imgBorderRadius: Sizes.sm,
-                            isNetworkImg: true,
-                            imgPath: assetImage.productSmartWatch),
-                  
+                    CurvedImage(
+                        height: 145,
+                        fit: BoxFit.contain,
+                        imgBorderRadius: Sizes.sm,
+                        isNetworkImg: true,
+                        imgPath: product.thumbnail),
 
                     // discount tag
-                    Positioned(
-                      top: 3,
-                     
-                      // left: 3,
-                      child: CircularContainer(
-                        width: 40,
-                        height: 20,
-                        radius: Sizes.sm,
-                        bgColor: Colors.amber.withOpacity(.9),
-                        // bgColor: Colors.deepPurple.withOpacity(.2),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: Sizes.sm, vertical: Sizes.xs),
-                        child: Text(
-                          TxtContents.discountPercentTxt,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelSmall!
-                              .copyWith(color: Colors.black,fontSize: 8),
+                    if (double.parse(discountpercent!) >
+                        0) //show only have discount
+                      Positioned(
+                        top: 3,
+
+                        // left: 3,
+                        child: CircularContainer(
+                          width: 40,
+                          height: 20,
+                          radius: Sizes.sm,
+                          bgColor: Colors.amber.withOpacity(.9),
+                          // bgColor: Colors.deepPurple.withOpacity(.2),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: Sizes.sm, vertical: Sizes.xs),
+                          child: Text(
+                            "-$discountpercent %",
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall!
+                                .copyWith(color: Colors.black, fontSize: 8),
+                          ),
                         ),
                       ),
-                    ),
 
                     //wishlist
                      Positioned(
-                        right:0,//.8
+                        right: 0, //.8
                         top: -7,
-                        child: CircularIcon(
-                          showBorder: false,
-                          icon: Iconsax.heart,
-                          size: Sizes.lg,
-                          onPressed: () {
-
-                          },
-                        )
-
+                        // child: CircularIcon(
+                        //   showBorder: false,
+                        //   icon: Iconsax.heart,
+                        //   size: Sizes.lg,
+                        //   onPressed: () {},
+                        // )
+                        child: FavouriteIcon(productId:product.id ,),
                         ),
                   ],
                 ),
               ),
 
-             const SizedBox(
-                height: Sizes.spaceBetween/2+3,
+              const SizedBox(
+                height: Sizes.spaceBetween / 2 + 3,
               ),
 
               //Product title
@@ -114,8 +116,8 @@ class _ProductCartVerticalState extends State<ProductCartVertical> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const ProductTitleTxt(
-                      productTitle: TxtContents.productSmartWatchTxt,
+                    ProductTitleTxt(
+                      productTitle: product.title,
                     ),
                     const SizedBox(
                       height: Sizes.spaceBetween / 2,
@@ -123,8 +125,8 @@ class _ProductCartVerticalState extends State<ProductCartVertical> {
 
                     //brand name and verifed icon
 
-                    const BrandNameWithVerify(
-                      brandName: TxtContents.brandRemax,
+                    BrandNameWithVerify(
+                      brandName: product.brand!=null ? product.brand!.name:'',
                     ),
                     // Row(
                     //   children: [
@@ -155,7 +157,36 @@ class _ProductCartVerticalState extends State<ProductCartVertical> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //price
-                        const ProductPriceTxt(currency: "Ks", price: '260000'),
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (product.salePrice > 0)
+                                // if (product.productType ==
+                                //         ProductType.single.toString() &&
+                                //     product.salePrice > 0)
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: Sizes.sm),
+                                  child: Text(
+                                    "\$${product.price}",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelSmall!
+                                        .apply(
+                                            decoration:
+                                                TextDecoration.lineThrough),
+                                  ),
+                                ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: Sizes.sm),
+                                child: ProductPriceTxt(
+                                    currency: "\$",
+                                    price: product.salePrice.toString()),
+                              ),
+                            ],
+                          ),
+                        ),
 
                         //add to cart
                         Container(

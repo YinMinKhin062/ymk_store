@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:ymk_store/features/personalization/controllers/userController.dart';
 import 'package:ymk_store/features/personalization/screens/profile/profile.dart';
-import 'package:ymk_store/features/shop/screens/settings/settings.dart';
-import 'package:ymk_store/navigationMenu.dart';
 import 'package:ymk_store/utils/networkConnection/loaders.dart';
 
 import '../../../data/repositories/user/user_repositories.dart';

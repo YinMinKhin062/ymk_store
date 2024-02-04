@@ -4,7 +4,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:ymk_store/features/personalization/screens/profile/profile.dart';
 
 import '../../../features/personalization/controllers/userController.dart';
-import '../../../utils/constants/txtContents.dart';
 import '../../../utils/constants/assetImage.dart';
 import '../personalWidgets/profileImage.dart';
 
@@ -18,9 +17,13 @@ class UserProfileTile extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.to(const Profile()),
       child: ListTile(
-        leading: const ProfileImage(
-          imageName: assetImage.user3,
-        ),
+        leading: Obx(() {
+          final networkImg = controller.user.value.profilepic;
+          final image = networkImg!.isNotEmpty ? networkImg : assetImage.user3;
+          return ProfileImage(
+            imageName: image,
+          );
+        }),
         title: Obx(
           () => Text(
             controller.user.value.userName,

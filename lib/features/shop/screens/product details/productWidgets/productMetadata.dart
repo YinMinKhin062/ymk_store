@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:ymk_store/features/shop/controlllers/productController.dart';
+import 'package:ymk_store/features/shop/models/productModel.dart';
 
 import '../../../../../common/widgets/customShapes/containers/circularContainer.dart';
 import '../../../../../common/widgets/products/brandNameWithVerify.dart';
@@ -8,16 +11,21 @@ import '../../../../../utils/constants/txtContents.dart';
 import '../../../../../utils/theme/custom_themes/sizes.dart';
 
 class ProductMetadata extends StatelessWidget {
-  const ProductMetadata({super.key});
+  const ProductMetadata({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
+    final discountPercent = controller.calculateSalePercent(product.price, product.salePrice);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
             //discount tag
+            if(double.parse(discountPercent!)>0)
             CircularContainer(
               width: 40,
               height: 40,
@@ -27,7 +35,7 @@ class ProductMetadata extends StatelessWidget {
               child: Center(
                 child: Text.rich(TextSpan(children: [
                   TextSpan(
-                    text: TxtContents.discountPercentTxt,
+                    text:"-$discountPercent %",
                     style: Theme.of(context).textTheme.labelSmall!.copyWith(
                           color: Colors.black,
                           fontSize: 8,
@@ -45,7 +53,7 @@ class ProductMetadata extends StatelessWidget {
             ),
 
             const SizedBox(
-              width: Sizes.sm+2,
+              width: Sizes.sm + 2,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,13 +69,13 @@ class ProductMetadata extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      "Ks 260,000",
+                      "\$${product.price}",
                       style: Theme.of(context).textTheme.labelLarge!.apply(
                           decoration: TextDecoration.lineThrough), //titlesmall
                     ),
                     const SizedBox(width: Sizes.sm),
                     Text(
-                      "Ks 195,000",
+                      "\$${product.salePrice}",
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -97,8 +105,8 @@ class ProductMetadata extends StatelessWidget {
         ),
 
         //product title
-        const ProductTitleTxt(
-          productTitle: TxtContents.productSmartWatchTxt,
+        ProductTitleTxt(
+          productTitle: product.title,
           txtSize: TextSizes.large,
         ),
         const SizedBox(
@@ -116,7 +124,7 @@ class ProductMetadata extends StatelessWidget {
               width: Sizes.spaceBetween,
             ),
             Text(
-              TxtContents.statusValueTxt,
+              controller.getProductStockStatus(product.stock),
               style: Theme.of(context).textTheme.labelLarge,
             )
           ],
@@ -126,8 +134,8 @@ class ProductMetadata extends StatelessWidget {
           height: Sizes.spaceBetween / 2,
         ),
 
-        const BrandNameWithVerify(
-          brandName: TxtContents.brandRemax,
+        BrandNameWithVerify(
+          brandName: product.brand!.name,
           txtSizes: TextSizes.large,
         )
       ],

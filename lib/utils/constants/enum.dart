@@ -4,6 +4,8 @@ enum OrderStatus { processing, shipped, delivered }
 
 enum PaymentMethods { paypal, mastercard, visa, master }
 
+enum ProductType{single,variable}
+
 enum ShippingTownships {
   yangon,
   mandalay,

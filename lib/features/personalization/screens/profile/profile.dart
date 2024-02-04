@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ymk_store/common/widgets/customShapes/containers/circularContainer.dart';
 import 'package:ymk_store/common/widgets/homeWidget/appbar.dart';
 import 'package:ymk_store/common/widgets/text/headerSection.dart';
 import 'package:ymk_store/features/personalization/controllers/userController.dart';
-import 'package:ymk_store/features/personalization/screens/profile/widget/reAuth_UserLogin.dart';
+import 'package:ymk_store/utils/Loading/myShimmerEffet.dart';
 import 'package:ymk_store/utils/constants/assetImage.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 
@@ -32,24 +33,41 @@ class Profile extends StatelessWidget {
         child: Column(
           children: [
             //profile Picture
+
             SizedBox(
               width: double.infinity,
-              height: 73,
+              // height: 73,
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      controller.uploadUserProfilePic();
+                    },
                     child: Stack(
                       clipBehavior: Clip.none,
-                      children: const [
-                        ProfileImage(
-                          imageName: assetImage.user3,
-                          bgColor: Colors.black,
-                          width: 70,
-                          height: 70,
-                          padding: 2,
-                        ),
-                        Positioned(
+                      children: [
+                        Obx(() {
+                          final networkImg = controller.user.value.profilepic;
+                          final image = networkImg!.isNotEmpty
+                              ? networkImg
+                              : assetImage.user3;
+                          return controller.profileLoading.value
+                              ? const MyShimmerEffect(
+                                  width: 70,
+                                  height: 70,
+                                  radius: 70,
+                                )
+                              : ProfileImage(
+                                  imageName: image,
+                                  bgColor: Colors.black,
+                                  width: 70,
+                                  height: 70,
+                                  padding: 2,
+                                );
+                        }),
+
+                        // }),
+                        const Positioned(
                             bottom: -2,
                             right: -5,
                             child: CircularContainer(
@@ -69,13 +87,17 @@ class Profile extends StatelessWidget {
                         // CircularImage(height: 50, width: 80, padding:Sizes.sm, image:assetImage.user3,isNetworkImage: true,)
                       ],
                     ),
+                    // ),
                   ),
                 ],
               ),
+              // ),
             ),
+            // ),
+            // ),
 
-            //details
-            //profile information
+            // details
+            // profile information
             const SizedBox(
               height: Sizes.spaceBetween,
             ),
@@ -111,27 +133,37 @@ class Profile extends StatelessWidget {
               height: Sizes.spaceBetween,
             ),
 
+            //userID
             ProfileMenu(
               nameTitle: TxtContents.userIDTitle,
               nameValue: controller.user.value.id,
               icon: Iconsax.copy,
-              onPressed: () {},
+              onPressed: () async {
+                await Clipboard.setData(
+                        ClipboardData(text: controller.user.value.id))
+                    .then((value) => ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("User ID is copied"))));
+              },
             ),
+            //email
             ProfileMenu(
               nameTitle: TxtContents.emailTitle,
               nameValue: controller.user.value.email,
               onPressed: () {},
             ),
+            //phone no
             ProfileMenu(
               nameTitle: TxtContents.phoneNoTitle,
               nameValue: controller.user.value.phoneno,
               onPressed: () {},
             ),
+            //gender
             ProfileMenu(
               nameTitle: TxtContents.genderTitle,
               nameValue: TxtContents.genderValue,
               onPressed: () {},
             ),
+            //date of birth
             ProfileMenu(
               nameTitle: TxtContents.doBTitle,
               nameValue: TxtContents.doBValue,

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:ymk_store/data/repositories/authentication/authentication_Repository.dart';
 import 'package:ymk_store/features/auth/controllers/signup/verifyEmailController.dart';
-import 'package:ymk_store/features/auth/screens/SignUp/successScreen.dart';
 import 'package:ymk_store/features/auth/screens/loginScreen.dart';
 
 import 'package:ymk_store/utils/constants/assetImage.dart';

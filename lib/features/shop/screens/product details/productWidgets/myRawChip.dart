@@ -8,10 +8,12 @@ class MyRawChip extends StatefulWidget {
       {super.key,
       required this.text,
       required this.isSelected,
-      this.onSelected
+      this.onSelected,
+      this.isEnabled=true,
       });
 
   final bool isSelected;
+  final bool isEnabled;
   final String text;
   final void Function(bool)? onSelected;
 
@@ -26,6 +28,7 @@ class _MyRawChipState extends State<MyRawChip> {
     // bool changeSelected=widget.isSelected;
     final hasColor = MyHelperFunctions.getColor(widget.text);
     return RawChip(
+      disabledColor: Colors.grey.withOpacity(.3),
         label: hasColor != null
             ? const SizedBox()
             : Text(
@@ -33,6 +36,7 @@ class _MyRawChipState extends State<MyRawChip> {
               ),
         selected: widget.isSelected,
         onSelected:widget.onSelected,
+        isEnabled:widget.isEnabled ,
         checkmarkColor: widget.isSelected && hasColor==Colors.white? Colors.black : widget.isSelected ? Colors.white :null,
         // checkmarkColor: isSelected ? Colors.white :null,
         labelStyle: TextStyle(

@@ -16,9 +16,16 @@ class MyHelperFunctions {
       return Colors.black;
     } else if (text == "White") {
       return Colors.white;
+    } else if (text == "Violet" || text=="Purple") {
+      return Colors.deepPurple;
     } else if (text == "Grey") {
       return Colors.grey;
-    } else {
+    } else if (text == "Yellow") {
+      return Colors.yellow;
+    }else if(text=="Silver"){
+        return Colors.grey.withOpacity(.2);
+    } 
+    else {
       return null;
     }
   }

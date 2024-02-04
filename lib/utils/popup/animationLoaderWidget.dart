@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:lottie/lottie.dart';
-import 'package:ymk_store/utils/constants/assetImage.dart';
 
 import '../theme/custom_themes/sizes.dart';
 
@@ -13,13 +9,16 @@ class AnimationLoaderWidget extends StatelessWidget {
       required this.text,
       this.showAction = false,
       this.actionText,
-      this.onActionPressed});
+      this.onActionPressed,
+      this.width=60,
+      this.height=60});
 
   final String animation;
   final String text;
   final String? actionText;
   final bool showAction;
   final VoidCallback? onActionPressed;
+  final  double width,height;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +28,8 @@ class AnimationLoaderWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(Sizes.md),
           child:  Image(
             image: AssetImage(animation),
-            width: 60,
-            height: 60,
+            width: width,
+            height: height,
           ),
         ),
         // Image.asset(

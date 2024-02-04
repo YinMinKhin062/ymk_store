@@ -2,18 +2,18 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:ymk_store/data/repositories/user/user_repositories.dart';
-import 'package:ymk_store/features/auth/controllers/signup/verifyEmailController.dart';
 import 'package:ymk_store/features/auth/screens/SignUp/verifyEmail.dart';
 import 'package:ymk_store/features/auth/screens/loginScreen.dart';
 import 'package:ymk_store/features/auth/screens/onboarding.dart';
 import 'package:ymk_store/navigationMenu.dart';
 import 'package:ymk_store/utils/exception/MyFirebaseAuthException.dart';
+
+import '../../../utils/localStorage/storage_utility.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -32,7 +32,12 @@ class AuthenticationRepository extends GetxController {
     final user =
         _auth.currentUser; //if you are sure the user is currently signed-in
     if (user != null) {
+      //if user is logged in
       if (user.emailVerified) {
+        //initialize user specific storage
+        await LocalStorage.init(user.uid);
+
+        //if user is verified, navigate to home screen
         Get.offAll(() => const NavigationMenu());
       } else {
         Get.offAll(() => VeriyEmailScreen(
