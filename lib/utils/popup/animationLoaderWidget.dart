@@ -39,15 +39,15 @@ class AnimationLoaderWidget extends StatelessWidget {
         //   child: Lottie.asset(assetImage.loadingImg,
         //       width: MediaQuery.of(context).size.width * .8),
         // ), //display animation
-        // const SizedBox(
-        //   height: Sizes.defaultSpace,
-        // ),
+        const SizedBox(
+          height: Sizes.defaultSpace,
+        ),
         Text(
           text,
           style: Theme.of(context)
               .textTheme
               .bodyMedium!
-              .copyWith(color: Colors.white, fontWeight: FontWeight.w600),
+              .copyWith(color: Colors.black, fontWeight: FontWeight.w600),
           textAlign: TextAlign.center,
         ),
         const SizedBox(

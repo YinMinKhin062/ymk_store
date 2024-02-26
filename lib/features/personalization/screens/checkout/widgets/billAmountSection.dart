@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ymk_store/utils/constants/enum.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 import 'package:ymk_store/utils/helper/priceCalculator.dart';
 
 import '../../../../../utils/theme/custom_themes/sizes.dart';
+import '../../../../shop/controlllers/cartController.dart';
 
 class BillAmountSection extends StatelessWidget {
   const BillAmountSection({super.key});
@@ -10,7 +12,10 @@ class BillAmountSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-   
+    final controller=CartController.instance;
+    final subtotal=controller.totalCartPrice.value;
+    final totalPrice=PriceCalculator.calculateTotalPrice(subtotal,"ShippingTownships.yangon").toStringAsFixed(2);
+    final shippingfee= PriceCalculator.shippingFeeCalculator("ShippingTownships.yangon");
     return Column(
       
       children: [
@@ -19,7 +24,7 @@ class BillAmountSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(TxtContents.subtotalTxt,style: Theme.of(context).textTheme.bodyMedium,),
-            Text("Ks 4,000,000",style: Theme.of(context).textTheme.bodyMedium,),
+            Text("\$ ${subtotal}",style: Theme.of(context).textTheme.bodyMedium,),
             
           ],
         ),
@@ -29,7 +34,7 @@ class BillAmountSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(TxtContents.shppingFeeTxt,style: Theme.of(context).textTheme.bodyMedium,),
-            Text("Ks ${PriceCalculator.shippingFeeCalculator("ShippingTownships.yangon")}",style: Theme.of(context).textTheme.labelMedium,),
+            Text("\$ $shippingfee",style: Theme.of(context).textTheme.labelMedium,),
             
           ],
         ),
@@ -39,7 +44,7 @@ class BillAmountSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(TxtContents.TaxFeeTxt,style: Theme.of(context).textTheme.bodyMedium,),
-            Text("Ks ${PriceCalculator.getTaxAmount(400000)}",style: Theme.of(context).textTheme.labelMedium,),
+            Text("\$ ${PriceCalculator.getTaxAmount(subtotal).toStringAsFixed(2)}",style: Theme.of(context).textTheme.labelMedium,),
             
           ],
         ),
@@ -49,7 +54,7 @@ class BillAmountSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(TxtContents.orderTotalTxt,style: Theme.of(context).textTheme.bodyMedium,),
-            Text("Ks ${PriceCalculator.calculateTotalPrice(400000,"ShippingTownships.yangon")}",style: Theme.of(context).textTheme.titleMedium,),
+            Text("\$ ${PriceCalculator.calculateTotalPrice(subtotal,"ShippingTownships.yangon").toStringAsFixed(2)}",style: Theme.of(context).textTheme.titleMedium,),
             
           ],
         ),

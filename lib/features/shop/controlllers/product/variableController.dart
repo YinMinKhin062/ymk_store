@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
+import 'package:ymk_store/features/shop/controlllers/cartController.dart';
 import 'package:ymk_store/features/shop/models/productModel.dart';
 import 'package:ymk_store/features/shop/models/productVariationModel.dart';
-
 
 class VariableController extends GetxController {
   static VariableController get instance => Get.find();
@@ -17,19 +17,21 @@ class VariableController extends GetxController {
 //select attribute and variation
   void onAttributeSelected(
       ProductModel product, attributeName, attributeValue) {
-    // final selectedAttribute = Map<String, dynamic>.from(currentAttribute);
-    // selectedAttribute[attributeName] = attributeValue;
+       
+    final selectedAttribute = Map<String, dynamic>.from(currentAttribute);
+    selectedAttribute[attributeName] = attributeValue;
     currentAttribute[attributeName] = attributeValue;
 
     if (kDebugMode) {
       print("Current Attribute $currentAttribute");
+      // print("Current Attribute $selectedAttribute");
     }
 
-    // final selectedVariation = product.productVariations!.firstWhere(
-    //   (variation) =>
-    //       isSameAttributeValues(variation.attributeValues, selectedAttribute),
-    //   orElse: () => ProductVariationModel.empty(),
-    // );
+    final selectedVariation = product.productVariations!.firstWhere(
+      (variation) =>
+          isSameAttributeValues(variation.attributeValues, selectedAttribute),
+      orElse: () => ProductVariationModel.empty(),
+    );
 
     //show selected variation image as main img
     // if (selectedVariation.image!.isNotEmpty) {
@@ -37,9 +39,17 @@ class VariableController extends GetxController {
     //       selectedVariation.image!;
     // }
 
-    // currentVariation.value = selectedVariation;
+    if (selectedVariation.id.isNotEmpty) {
+      final cartController = CartController.instance;
+      cartController.productQuantityInCart.value = cartController
+          .getVariationQuantityInCart(product.id, selectedVariation.id);
+    }
 
-    // getProductVariationStockStatus();
+    //assign selected vaiation
+    currentVariation.value = selectedVariation;
+
+    getProductVariationStockStatus();
+    
   }
 
 //check if selected attributes matches any variation attributes
@@ -71,10 +81,13 @@ class VariableController extends GetxController {
   void getProductVariationStockStatus() {
     variationStockStatus.value =
         currentVariation.value.stock > 0 ? 'In Stock' : "Out of stock";
+    if (kDebugMode) {
+      print(variationStockStatus);
+    }
   }
 
   //resetSelected Attributes
-  void resetSelectedAttribues() {
+  void resetSelectedAttributes() {
     currentAttribute.clear();
     variationStockStatus.value = '';
     currentVariation.value = ProductVariationModel.empty();

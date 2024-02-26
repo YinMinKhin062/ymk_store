@@ -38,12 +38,9 @@ class Store extends StatelessWidget {
                 .headlineMedium!
                 .copyWith(fontSize: 27),
           ),
-          actions: [
+          actions: const [
             ShoppingCartWidget(
               iconColor: Colors.black,
-              onPressed: () {
-                Get.to(() => const Cart());
-              },
             )
           ],
         ),
@@ -106,30 +103,6 @@ class Store extends StatelessWidget {
                             ),
                           );
                         }
-                        //  else {
-                        // return GridLayout(
-                        //     itemCount: brands.length,
-                        //     mainAxisExtent: 60, //60
-                        //     itemBuilder: (_, index) {
-                        //       if (brandController.isLoading.value) {
-                        //         return const MyShimmerEffect(
-                        //           width: 100,
-                        //           height: 50,
-                        //           radius: 10,
-                        //         );
-                        //       }
-                        //       if (brandController.featuredBrands.isEmpty) {
-                        //         return const Text("No Data Found");
-                        //       } else {
-                        //         return BrandCard(
-                        //           brandImg: brands[index].image,
-                        //           brandName: brands[index].name,
-                        //           brandProductCounts:
-                        //               brands[index].productCount.toString(),
-                        //         );
-                        //       }
-                        //     });
-                        // }
                       }),
                     ],
                   ),

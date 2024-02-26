@@ -24,6 +24,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productController = Get.put(ProductController());
+    
 
     return Scaffold(
       body: SafeArea(
@@ -124,7 +125,7 @@ class Home extends StatelessWidget {
                       } else {
                         return GridLayout(
                           itemCount: productController.featuredProducts.length,
-                          mainAxisExtent: 282,
+                          // mainAxisExtent: 282,
                           itemBuilder: (_, index) => ProductCartVertical(
                             product: productController.featuredProducts[index],
                           ),

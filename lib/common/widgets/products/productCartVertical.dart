@@ -6,7 +6,9 @@ import 'package:ymk_store/common/widgets/customShapes/containers/circularContain
 import 'package:ymk_store/common/widgets/homeWidget/circularIcon.dart';
 import 'package:ymk_store/common/widgets/homeWidget/curvedImage.dart';
 import 'package:ymk_store/common/widgets/products/brandNameWithVerify.dart';
+import 'package:ymk_store/common/widgets/products/productAddToCartBtn.dart';
 import 'package:ymk_store/common/widgets/text/productPriceTxt.dart';
+import 'package:ymk_store/features/shop/controlllers/product/variableController.dart';
 import 'package:ymk_store/features/shop/controlllers/productController.dart';
 
 import '../../../features/shop/models/productModel.dart';
@@ -28,9 +30,13 @@ class ProductCartVertical extends StatelessWidget {
         controller.calculateSalePercent(product.price, product.salePrice);
 
     return GestureDetector(
-        onTap: () => Get.to(ProductDetail(
+        onTap: () {
+            VariableController.instance.currentAttribute.clear();//this is still wrong
+            // VariableController.instance.resetSelectedAttributes();//this is still wrong
+             Get.to(ProductDetail(
               product: product,
-            )),
+            ));
+        },
         child: Container(
           width: 180,
           padding: const EdgeInsets.all(1),
@@ -43,7 +49,7 @@ class ProductCartVertical extends StatelessWidget {
           child: Column(
             children: [
               const SizedBox(
-                height: Sizes.spaceBetween / 2,
+                height: Sizes.spaceBetween/2 ,
               ),
               //thumbnail, wishlist, discount tag
 
@@ -91,17 +97,19 @@ class ProductCartVertical extends StatelessWidget {
                       ),
 
                     //wishlist
-                     Positioned(
-                        right: 0, //.8
-                        top: -7,
-                        // child: CircularIcon(
-                        //   showBorder: false,
-                        //   icon: Iconsax.heart,
-                        //   size: Sizes.lg,
-                        //   onPressed: () {},
-                        // )
-                        child: FavouriteIcon(productId:product.id ,),
-                        ),
+                    Positioned(
+                      right: 0, //.8
+                      top: -7,
+                      // child: CircularIcon(
+                      //   showBorder: false,
+                      //   icon: Iconsax.heart,
+                      //   size: Sizes.lg,
+                      //   onPressed: () {},
+                      // )
+                      child: FavouriteIcon(
+                        productId: product.id,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -126,7 +134,8 @@ class ProductCartVertical extends StatelessWidget {
                     //brand name and verifed icon
 
                     BrandNameWithVerify(
-                      brandName: product.brand!=null ? product.brand!.name:'',
+                      brandName:
+                          product.brand != null ? product.brand!.name : '',
                     ),
                     // Row(
                     //   children: [
@@ -189,23 +198,9 @@ class ProductCartVertical extends StatelessWidget {
                         ),
 
                         //add to cart
-                        Container(
-                          decoration: const BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(Sizes.cardRadiusMd),
-                                  bottomRight: Radius.circular(
-                                      Sizes.productImageRadius))),
-                          child: const SizedBox(
-                            height: 40,
-                            width: 40,
-                            child: Center(
-                                child: Icon(
-                              Iconsax.add,
-                              color: Colors.white,
-                            )),
-                          ),
-                        )
+                        ProductAddToCartBtn(
+                          product: product,
+                        ),
                       ],
                     )
                   ],

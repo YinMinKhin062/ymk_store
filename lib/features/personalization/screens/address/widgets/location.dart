@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'package:ymk_store/utils/validators/validation.dart';
 
+import '../../../controllers/addressController.dart';
 
 class CurrentLocation extends StatefulWidget {
   const CurrentLocation({super.key});
@@ -15,45 +17,51 @@ class _CurrentLocationState extends State<CurrentLocation> {
   Position? currentLocation;
   String? currentAddress;
   TextEditingController address_controller = TextEditingController();
+  final controller = AddressController.instance;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      // crossAxisAlignment: CrossAxisAlignment.spaceBetween,
-      children: [
-        Expanded(
-          flex: 8,
-          child: TextFormField(
-            controller: address_controller,
-            readOnly: true,
-            maxLines: 1,
-            decoration: InputDecoration(
-                label: const Text("Use current location"),
-                prefixIcon: const Icon(Iconsax.location),
-                suffixIcon: GestureDetector(
-                  onTap: () async {
-                    currentLocation = await getCurrentLocation();
-                    getCurrentAddress();
-                    address_controller.text = currentAddress!;
-                  },
-                  child: const Icon(
-                    Iconsax.location_add,
-                    color: Colors.deepPurple,
-                  ),
-                )
-                ),
+        // crossAxisAlignment: CrossAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            flex: 8,
+            child: TextFormField(
+              validator: (value) =>
+                  MyValidator.validationEmptyText('Current Location', value),
+              controller: address_controller,
+              readOnly: true,
+              maxLines: 1,
+              decoration: InputDecoration(
+                  label: const Text("Use current location"),
+                  prefixIcon: const Icon(Iconsax.location),
+                  suffixIcon: GestureDetector(
+                    onTap: () async {
+                      currentLocation = await getCurrentLocation();
+                      getCurrentAddress();
+                      address_controller.text = currentAddress!;
+                      if(currentAddress!=null){
+                        controller.currentLocation.text=currentAddress!;
+                      }
+                    },
+                    child: const Icon(
+                      Iconsax.location_add,
+                      color: Colors.deepPurple,
+                    ),
+                  )),
+            ),
           ),
-        ),
-        // SizedBox(width: Sizes.spaceBetween,),
-        // Flexible(
-        //   child: ElevatedButton(onPressed: ()async{
-        //      currentLocation = await getCurrentLocation();
-        //               getCurrentAddress();
-        //               address_controller.text = currentAddress!;
-        //   }, child:Icon(Iconsax.location_add),
-        // ))
-      ],
-    );
+          // SizedBox(width: Sizes.spaceBetween,),
+          // Flexible(
+          //   child: ElevatedButton(onPressed: ()async{
+          //      currentLocation = await getCurrentLocation();
+          //               getCurrentAddress();
+          //               address_controller.text = currentAddress!;
+          //   }, child:Icon(Iconsax.location_add),
+          // ))
+        ],
+      );
+    
     // child: CircularContainer(
     //   child: Row(
     //     children: [

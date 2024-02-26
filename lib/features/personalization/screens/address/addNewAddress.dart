@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:ymk_store/common/widgets/homeWidget/appbar.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
+import 'package:ymk_store/utils/validators/validation.dart';
 
 import '../../../../utils/theme/custom_themes/sizes.dart';
+import '../../controllers/addressController.dart';
 import 'widgets/location.dart';
 
 class AddNewAddress extends StatefulWidget {
@@ -14,7 +17,9 @@ class AddNewAddress extends StatefulWidget {
 }
 
 class _AddNewAddressState extends State<AddNewAddress> {
-  TextEditingController addressController = TextEditingController();
+  final controller = Get.put(AddressController());
+
+  // TextEditingController addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +38,16 @@ class _AddNewAddressState extends State<AddNewAddress> {
         ),
         body: SingleChildScrollView(
           child: Form(
+            key: controller.formKeys,
             child: Padding(
               padding: const EdgeInsets.all(Sizes.defaultSpace),
               child: Column(
                 children: [
                   //name
                   TextFormField(
+                    validator: (value) =>
+                        MyValidator.validationEmptyText('Name', value),
+                    controller: controller.name,
                     keyboardType: TextInputType.name,
                     decoration: const InputDecoration(
                         prefixIcon: Icon(Iconsax.user),
@@ -49,6 +58,8 @@ class _AddNewAddressState extends State<AddNewAddress> {
                   ),
                   //phone no
                   TextFormField(
+                    validator: (value) => MyValidator.validatePhoneno(value),
+                    controller: controller.phoneNo,
                     keyboardType: TextInputType.phone,
                     decoration: const InputDecoration(
                         prefixIcon: Icon(Iconsax.mobile),
@@ -64,6 +75,9 @@ class _AddNewAddressState extends State<AddNewAddress> {
                   ),
                   //address
                   TextFormField(
+                    controller: controller.houseNo,
+                    validator: (value) =>
+                        MyValidator.validationEmptyText('House no..', value),
                     keyboardType: TextInputType.streetAddress,
                     maxLines: 3,
                     decoration: const InputDecoration(
@@ -82,7 +96,9 @@ class _AddNewAddressState extends State<AddNewAddress> {
                   SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            controller.addNewAddress();
+                          },
                           child: const Text(TxtContents.saveBtn)))
                 ],
               ),

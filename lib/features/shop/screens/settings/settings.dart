@@ -128,12 +128,14 @@ class Settings extends StatelessWidget {
                 ),
 
                 //upload data
-                 SettingMenuTile(
-                    menuTitle: TxtContents.loadDataTxt,
-                    menuSubtitle: TxtContents.loadDataSubtitleTxt,
-                    icon: Iconsax.document_upload,onTap: () {
-                      Get.to(()=>const UploadData());
-                    },),
+                SettingMenuTile(
+                  menuTitle: TxtContents.loadDataTxt,
+                  menuSubtitle: TxtContents.loadDataSubtitleTxt,
+                  icon: Iconsax.document_upload,
+                  onTap: () {
+                    Get.to(() => const UploadData());
+                  },
+                ),
 
                 SettingMenuTile(
                   icon: Iconsax.location,

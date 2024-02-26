@@ -21,8 +21,11 @@ class CloudHelperFunctions {
     return null;
   }
 
-  static Widget? checkMultiRecordState<T>({required AsyncSnapshot<List<T>> snapshot,
-      Widget? loader, Widget? error, Widget? nothingFound}) {
+  static Widget? checkMultiRecordState<T>(
+      {required AsyncSnapshot<List<T>> snapshot,
+      Widget? loader,
+      Widget? error,
+      Widget? nothingFound}) {
     if (snapshot.connectionState == ConnectionState.waiting) {
       if (loader != null) return loader;
       return const Center(
@@ -30,7 +33,9 @@ class CloudHelperFunctions {
       );
     }
     if (!snapshot.hasData || snapshot.data == null || snapshot.data!.isEmpty) {
-      if (nothingFound != null) return Center(child: nothingFound);
+      if (nothingFound != null) {
+        return Center(child: nothingFound);
+      }
       return const Center(child: Text("No Data Found"));
     }
 

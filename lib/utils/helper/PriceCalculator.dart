@@ -1,4 +1,6 @@
 
+import '../constants/enum.dart';
+
 class PriceCalculator {
   static double calculateTotalPrice(double productPrice, String location) {
     double taxamount = productPrice*getTaxRate();
@@ -18,35 +20,35 @@ class PriceCalculator {
   static double shippingFeeCalculator(String location) {
     switch (location) {
       case "ShippingTownships.yangon":
-        return 2000;
+        return 1;
       case "ShippingTownships.mandalay":
-        return 4000.00;
+        return 1.5;
       case "ShippingTownships.chin":
-        return 8000.00;
+        return 2;
       case "ShippingTownships.naypyitaw":
-        return 4000.00;
+        return 1.5;
       case "ShippingTownships.bago":
-        return 4000.00;
+        return 1.5;
       case "ShippingTownships.mon":
-        return 4000.00;
+        return 1.5;
       case "ShippingTownships.ayeyarwaddy":
-        return 4000.00;
+        return 1.5;
       case "ShippingTownships.sagaing":
-        return 4000.00;
+        return 1.5;
       case "ShippingTownships.kayin":
-        return 4000.00;
+        return 1.5;
       case "ShippingTownships.kachin":
-        return 5500.00;
+        return 2.5;
       case "ShippingTownships.magway":
-        return 4000.00;
+        return 1.5;
       case "ShippingTownships.shan":
-        return 4000.00;
+        return 1.5;
       case "ShippingTownships.tanintharyi":
-        return 5500.00;
+        return 2.5;
       case "ShippingTownships.rakhine":
-        return 5500.00;
+        return 2.5;
       case "ShippingTownships.busstation":
-        return 1000.00;
+        return .5;
       default:
         return 0;
     }

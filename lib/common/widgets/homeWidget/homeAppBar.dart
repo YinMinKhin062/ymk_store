@@ -43,9 +43,6 @@ class HomeAppBar extends StatelessWidget {
       ),
       actions: [
         ShoppingCartWidget(
-          onPressed: () {
-            Get.to(() => const Cart());
-          },
           iconColor: color,
         ),
       ],

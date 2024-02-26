@@ -27,7 +27,7 @@ class ProductAttribute extends StatelessWidget {
                   (attribute) => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      HeaderSection(title: attribute.name!, btnTitle: ""),
+                      HeaderSection(title: attribute.name!, btnTitle: ""),//eg.attribute.name=Colors
                       const SizedBox(
                         height: Sizes.spaceBetween / 2,
                       ),
@@ -38,7 +38,7 @@ class ProductAttribute extends StatelessWidget {
                               final isSelected =
                                   controller.currentAttribute[attribute.name] ==
                                       value;
-
+                                
                               final available = controller
                                   .getAttributesAvailabilityInVariation(
                                       product.productVariations!,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../theme/custom_themes/sizes.dart';
+
 class Loaders {
   static warningSnackBar({required title, message = ''}) {
     Get.snackbar(title, message,
@@ -24,18 +26,23 @@ class Loaders {
         duration: const Duration(seconds: 3),
         backgroundColor: Colors.transparent,
         content: Container(
-          padding: const EdgeInsets.all(12),
+          padding:const  EdgeInsets.symmetric(
+            vertical:Sizes.spaceBetween,
+            horizontal: Sizes.spaceBetween),
           margin: const EdgeInsets.symmetric(horizontal: 30),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30),
-            color: Colors.grey.withOpacity(.9),
+            color: Colors.deepPurple,
           ),
-          child: Center(
-            child: Text(
-              message,
-              style: Theme.of(Get.context!).textTheme.labelLarge,
+
+            child: Padding(
+              padding: const EdgeInsets.only(left:12.0),
+              child: Text(
+                message,
+                style: Theme.of(Get.context!).textTheme.labelLarge!.copyWith(color: Colors.white),
+              ),
             ),
-          ),
+          
         )));
   }
 

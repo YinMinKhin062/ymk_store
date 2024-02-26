@@ -8,16 +8,20 @@ import 'package:ymk_store/features/shop/controlllers/product/favouriteController
 import '../homeWidget/circularIcon.dart';
 
 class FavouriteIcon extends StatelessWidget {
-  const FavouriteIcon({super.key,required this.productId});
+  const FavouriteIcon({super.key, required this.productId});
 
-final String productId;
+  final String productId;
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(FavouriteController());
     return Obx(
-      ()=> CircularIcon(
-        icon: controller.isFavourite(productId) ? Iconsax.heart5 : Iconsax.heart,
-        iconColor:controller.isFavourite(productId)? Colors.red: null,
+      () => CircularIcon(
+        
+        borderColor: Colors.grey.withOpacity(.1),
+        color: Colors.white,
+        icon:
+            controller.isFavourite(productId) ? Iconsax.heart5 : Iconsax.heart,
+        iconColor: controller.isFavourite(productId) ? Colors.red : null,
         showBorder: false,
         onPressed: () {
           controller.toggleFavouriteProduct(productId);

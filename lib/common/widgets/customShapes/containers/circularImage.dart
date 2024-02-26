@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 
 class CircularImage extends StatelessWidget {
   final double width, height, padding;
@@ -31,12 +31,22 @@ class CircularImage extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
       ),
       child: Center(
-        child: Image(
-          image: isNetworkImage
-              ? NetworkImage(image)
-              : AssetImage(image) as ImageProvider,
-          fit: fit,
-        ),
+        // child: Image(
+        //   image: isNetworkImage
+        //       ? NetworkImage(image)
+        //       : AssetImage(image) as ImageProvider,
+        //   fit: fit,
+        // ),
+        child: isNetworkImage
+            ? CachedNetworkImage(
+                imageUrl: image,
+                progressIndicatorBuilder: (context, url, progress) =>
+                    CircularProgressIndicator(
+                  value: progress.progress,
+                ),
+                errorWidget: (context, url, error) => Icon(Icons.error),
+              )
+            : Image(image: AssetImage(image) as ImageProvider),
       ),
     );
   }

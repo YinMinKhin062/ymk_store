@@ -1,45 +1,38 @@
 {
   "project_info": {
-    "project_number": "195881973020",
-    "project_id": "ymkstore-746da",
-    "storage_bucket": "ymkstore-746da.appspot.com"
+    "project_number": "552359783668",
+    "firebase_url": "https://ymkstore-1f8b8-default-rtdb.firebaseio.com",
+    "project_id": "ymkstore-1f8b8",
+    "storage_bucket": "ymkstore-1f8b8.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:195881973020:android:65a54bca5d1ab91caeb6d9",
+        "mobilesdk_app_id": "1:552359783668:android:9d84362e33e390fb0902a1",
         "android_client_info": {
           "package_name": "com.example.ymk_store"
         }
       },
       "oauth_client": [
         {
-          "client_id": "195881973020-f3fg7us2qotfpbgi1jkjc6bqie015nd5.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.ymk_store",
-            "certificate_hash": "b791afac968601185e2f2380fb1ff04068d10eb6"
-          }
-        },
-        {
-          "client_id": "195881973020-214fljbh5sddm6pi3apctohqak6u09o6.apps.googleusercontent.com",
+          "client_id": "552359783668-j93l00ubtlkmuh4thlhjmuus68pp428r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAnYfrs35lB5O0_GUpYH3Ez-A5tFar4mUk"
+          "current_key": "AIzaSyBn7ioChRCvjo1MzoMKwDDVVSibudNBmVY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "195881973020-214fljbh5sddm6pi3apctohqak6u09o6.apps.googleusercontent.com",
+              "client_id": "552359783668-j93l00ubtlkmuh4thlhjmuus68pp428r.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "195881973020-hv3uljh5u110btjr2uekn9r307lmboej.apps.googleusercontent.com",
+              "client_id": "552359783668-75rcor5ibeem34d9bc4rd6mpfoc576no.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.ymkStore"

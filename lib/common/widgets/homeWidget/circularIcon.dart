@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-class CircularIcon extends StatefulWidget {
+class CircularIcon extends StatelessWidget {
   final Color? color, iconColor;
   final double? size;
   final IconData icon;
@@ -12,7 +12,7 @@ class CircularIcon extends StatefulWidget {
   final BoxShadow? boxShadow;
   final bool showBoxShadow;
   // final BoxBorder border;
-  const CircularIcon({
+   CircularIcon({
     super.key,
     this.color,
     this.iconColor,
@@ -28,25 +28,22 @@ class CircularIcon extends StatefulWidget {
   });
 
   @override
-  State<CircularIcon> createState() => _CircularIconState();
-}
+  // bool isFavourite = false;
 
-class _CircularIconState extends State<CircularIcon> {
-  @override
-  bool isFavourite = false;
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.width,
-      height: widget.height,
+      width: width,
+      height: height,
       alignment: Alignment.center,
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
           // color: Colors.black.withOpacity(.06),
-          color: widget.color,
+          color: color,
           border:
-              widget.showBorder ? Border.all(color: widget.borderColor) : null,
+              // showBorder ? Border.all(color: borderColor) : null,
+             Border.all(color: borderColor) ,
           // boxShadow: [
           //   BoxShadow(
           //     color: Colors.grey.withOpacity(.3),
@@ -70,14 +67,14 @@ class _CircularIconState extends State<CircularIcon> {
           //   });
 
           // }
-          onPressed: widget.onPressed,
+          onPressed: onPressed,
           icon:
               //  Center(
               //   child:
               Icon(
-            isFavourite ? Iconsax.heart5 : widget.icon,
-            color: widget.iconColor,
-            size: widget.size,
+            icon,
+            color: iconColor,
+            size: size,
             shadows: [
               Shadow(
                 color: Colors.grey.withOpacity(.5),

@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:ymk_store/features/shop/controlllers/cartController.dart';
 
+import '../../../../../common/widgets/homeWidget/circularIcon.dart';
+import '../../../../../utils/constants/txtContents.dart';
 import '../../../../../utils/theme/custom_themes/sizes.dart';
+import '../../../models/productModel.dart';
 
 class BottomAddToCart extends StatelessWidget {
-  const BottomAddToCart({super.key, required this.child,this.height=82});
+  const BottomAddToCart({
+    super.key,
+    this.child,
+    this.height = 82,
+  });
 
-  final Widget child;
+  final Widget? child;
   final double height;
 
   @override
   Widget build(BuildContext context) {
+    // final controller = CartController.instance;
+    // controller.updateAlreadyAddedProductCount(product!);
     return Container(
       height: height,
       // alignment: Alignment.bottomCenter,
@@ -36,37 +48,39 @@ class BottomAddToCart extends StatelessWidget {
             topRight: Radius.circular(Sizes.cardRadiusLg),
           )),
       child: child,
-      // Row(
+      // child: Row(
       //   crossAxisAlignment: CrossAxisAlignment.center,
       //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
       //   children: [
-      //     //
-      //     Row(
-      //       children: [
-      //         CircularIcon(
-      //           icon: Iconsax.minus,
-      //           color: Colors.grey,
-      //           iconColor: Colors.white,
-      //           onPressed: () {},
-      //         ),
-      //         const SizedBox(
-      //           width: Sizes.spaceBetween,
-      //         ),
-      //         const Text("2"),
-      //         const SizedBox(
-      //           width: Sizes.spaceBetween,
-      //         ),
-      //         CircularIcon(
-      //           icon: Iconsax.add,
-      //           color: Colors.black,
-      //           iconColor: Colors.white,
-      //           onPressed: () {},
-      //         ),
-      //       ],
+      //     Obx(
+      //       ()=> Row(
+      //         children: [
+      //           CircularIcon(
+      //             icon: Iconsax.minus,
+      //             color: Colors.grey,
+      //             iconColor: Colors.white,
+      //             onPressed: () => controller.productQuantityInCart.value < 1
+      //                 ? null
+      //                 : controller.productQuantityInCart.value -= 1,
+      //           ),
+      //           const SizedBox(
+      //             width: Sizes.spaceBetween,
+      //           ),
+      //           Text(controller.productQuantityInCart.value.toString()),
+      //           const SizedBox(
+      //             width: Sizes.spaceBetween,
+      //           ),
+      //           CircularIcon(
+      //             icon: Iconsax.add,
+      //             color: Colors.black,
+      //             iconColor: Colors.white,
+      //             onPressed: () => controller.productQuantityInCart.value += 1,
+      //           ),
+      //         ],
+      //       ),
       //     ),
-
       //     ElevatedButton(
-      //       onPressed: () {},
+      //       onPressed: () => controller.productQuantityInCart.value<1? null: controller.addToCart(product),
       //       style: ElevatedButton.styleFrom(
       //           padding: const EdgeInsets.all(
       //             Sizes.md,

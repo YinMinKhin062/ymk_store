@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ymk_store/common/widgets/customShapes/containers/circularContainer.dart';
 import 'package:ymk_store/features/shop/models/productModel.dart';
 import 'package:ymk_store/features/shop/screens/product%20details/productWidgets/productDesc.dart';
@@ -8,8 +9,10 @@ import 'package:ymk_store/utils/constants/enum.dart';
 import 'package:ymk_store/utils/constants/txtContents.dart';
 
 import '../../../../utils/theme/custom_themes/sizes.dart';
+import '../../../personalization/screens/checkout/checkout.dart';
 import 'productWidgets/bottomAddToCart.dart';
 import 'productWidgets/productAttribute.dart';
+import 'productWidgets/productDetailsBtmToCart.dart';
 import 'productWidgets/productMetadata.dart';
 import 'productWidgets/quantityWithAddtoCart.dart';
 
@@ -20,8 +23,8 @@ class ProductDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const BottomAddToCart(
-        child: QuantityWithAddtoCart(),
+      bottomNavigationBar: ProductDetailsBtmAddToCart(
+        product: product,
       ),
       // backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
@@ -73,7 +76,6 @@ class ProductDetail extends StatelessWidget {
                     ProductMetadata(
                       product: product,
                     ),
-                     
                   ],
                 ),
               ),
@@ -89,7 +91,9 @@ class ProductDetail extends StatelessWidget {
                 child: Column(
                   children: [
                     if (product.productType == ProductType.variable.toString())
-                       ProductAttribute(product: product,),
+                      ProductAttribute(
+                        product: product,
+                      ),
                     if (product.productType == ProductType.variable.toString())
                       const SizedBox(
                         height: Sizes.spaceBetween,
@@ -99,7 +103,7 @@ class ProductDetail extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed:()=>Get.to(()=>const Checkout()) ,
                           child: const Text(TxtContents.checkOutTxt)),
                     ),
 

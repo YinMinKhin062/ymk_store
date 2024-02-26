@@ -21,7 +21,7 @@ class Wishlist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final wishlistController = FavouriteController.instance;
+    final wishlistController = Get.put(FavouriteController());
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -49,7 +49,7 @@ class Wishlist extends StatelessWidget {
                     width: 150,
                     height: 150,
                     animation: assetImage.noWishlist,
-                    text: "Whoops!.Wishlist is Empty....",
+                    text: "Whoops! Wishlist is Empty....",
                     showAction: true,
                     actionText: 'Let\'s add some',
                     onActionPressed: () =>
@@ -66,7 +66,7 @@ class Wishlist extends StatelessWidget {
                   final products = snapshot.data!;
                   return GridLayout(
                     itemCount: products.length,
-                    mainAxisExtent: 282,
+                    // mainAxisExtent: 282,
                     itemBuilder: (_, index) =>
                         ProductCartVertical(product: products[index]),
                   );

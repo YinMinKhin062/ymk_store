@@ -116,6 +116,10 @@ class assetImage {
 //payment method
   static const String paypalImg =
       "https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/250_Paypal_logo-512.png";
+  static const String visaImg =
+      "https://www.freepnglogos.com/uploads/visa-inc-logo-png-11.png";
+  static const String masterImg =
+      "https://static-00.iconduck.com/assets.00/mastercard-icon-2048x1225-3kb6axel.png";
 
   static const String orderSuccessImg =
       "assets/images/onboarding/successfulOrder.png";
@@ -158,5 +162,7 @@ static const String product005_2="https://image-us.samsung.com/us/tablets/galaxy
 
 //no wishlis
 static const String noWishlist="assets/images/onboarding/wishlistEmpty.png";
+static const String cartempty="assets/images/onboarding/cartEmpty.png";
+
 
 }
